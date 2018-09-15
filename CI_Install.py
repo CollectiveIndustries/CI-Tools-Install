@@ -32,12 +32,24 @@ uname = getpass.getuser()
 os_name	= os.name
 user = user.replace(',', '')
 
+
+# Text output color definitions
+class color:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    END = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def prog_check(program):
 	p = Popen(['which', program], stdout=PIPE, stderr=PIPE)
 	p.communicate()
 	prog = p.returncode == 0
 	if prog == 1:
-		return 'Installed'
+		return '{}Installed{}{}'.format(color.OKGREEN,file,color.END)
 	else:
 		return 'Not Installed'
 
@@ -67,8 +79,8 @@ def main():
 	print('##   CI INSTALLER   ##')
 	print('##                  ##')
 	print('######################')
-    print('')
-    print('')
+	print('')
+	print('')
 	print("Welcome " + users + " to the Collective Industries Tools Installation.")
 	print("Please select what program(s) you would like to install.")
 	print("")

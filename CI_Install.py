@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/env python3
 #coding:utf8
 
 ######################################
@@ -17,12 +17,14 @@
 #############
 from sys import platform
 from subprocess import Popen, PIPE
+import shutil
 import distutils.spawn
 import os
 import subprocess
 import getpass
 import pwd
 import getpass
+import time
 
 ###############
 ## Variables ##
@@ -48,15 +50,13 @@ def Debug(var1, var2, TF):
 	DEBUG = True
 	if DEBUG == True and TF == True:
 		print(var1 +' = ' + var2)	
-
+	
 def prog_check(program):
-	p = Popen(['which', program], stdout=PIPE, stderr=PIPE)
-	p.communicate()
-	prog = p.returncode == 0
-	if prog == 1:
-		return color.OKGREEN + 'Installed' + color.END
-	else:
-		return color.FAIL + 'Not Installed' + color.END
+	return shutil.which(program) is not None
+	#p = Popen(['which', program], stdout=PIPE, stderr=PIPE)
+	#p.communicate()
+	#return p.returncode == 0
+	
 	
 if user == '':
 	users = uname
@@ -99,10 +99,20 @@ def main():
 def git():
 	# GitHub Installation
 	os.system('clear')
-	if str(prog_check('git')) == color.FAIL + 'Not Installed' + color.END:
+	if str(prog_check('git')) == False:
 		print('Getting ready to install GitHub.')
 		os.system('wget https://github.com/hammerzaine/CI-Tools-Install/blob/master/git_install.py')
+		os.system('./git_install.py')
+		print('GitHub is now installed')
+		time.sleep(5)
+		os.system('sudo rm git_install.py')
+		main()
 	else:
 		print('Are you sure you want to remove GitHub from your machine. \nYou can always Reinstall it later.')
+		yn = input('Y/N: ')
+		if yn.lower() == 'y':
+			print('Remove github here')
+		else:
+			main()
 		
 main()

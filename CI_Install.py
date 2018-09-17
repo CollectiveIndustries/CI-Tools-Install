@@ -43,6 +43,11 @@ class color:
     END = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+    
+def Debug(var1, var2, TF):
+	DEBUG = True
+	if DEBUG == True and TF == True:
+		print(var1 +' = ' + var2)	
 
 def prog_check(program):
 	p = Popen(['which', program], stdout=PIPE, stderr=PIPE)
@@ -70,6 +75,7 @@ def init():
 			
 def main():
 	init()
+	Debug('oper', oper, False)
 	print('######################')
 	print('##                  ##')
 	print('##   CI INSTALLER   ##')

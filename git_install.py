@@ -13,6 +13,11 @@
 from sys import platform
 import subprocess
 
+def Debug(var1, var2, TF):
+	DEBUG = True
+	if DEBUG == True and TF == True:
+		print(var1 +' = ' + var2)	
+		
 def init():
 	subprocess.call('clear')
 	if platform == 'linux' or platform == 'linux2':
@@ -25,7 +30,7 @@ def init():
 			
 def main():
 	init()
-	print oper
+	Debug('oper', oper, True)
 	if oper == 'debian':
 		print('Running Debian OS')
 			

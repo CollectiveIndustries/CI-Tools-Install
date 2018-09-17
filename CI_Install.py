@@ -64,7 +64,7 @@ else:
 	users = user
 
 def init():
-	subprocess.call('clear')
+	os.system('clear')
 	if platform == 'linux' or platform == 'linux2':
 		# linux
 		with open('/etc/os-release') as file:
@@ -98,7 +98,11 @@ def main():
 		
 def git():
 	# GitHub Installation
-	subprocess.call('clear')
-	print('This is were the github installation function will go')
+	os.system('clear')
+	if str(prog_check('git')) == color.FAIL + 'Not Installed' + color.END:
+		print('Getting ready to install GitHub.')
+		os.system('wget https://github.com/hammerzaine/CI-Tools-Install/blob/master/git_install.py')
+	else:
+		print('Are you sure you want to remove GitHub from your machine. \nYou can always Reinstall it later.')
 		
 main()

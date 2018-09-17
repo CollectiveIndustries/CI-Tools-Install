@@ -17,7 +17,13 @@ def Debug(var1, var2, TF):
 	DEBUG = True
 	if DEBUG == True and TF == True:
 		print(var1 +' = ' + var2)
-		
+
+def OSClear(osname):
+    if(osname == "win32"):
+        os.system("cls")
+    else: # well its not Windows we can just "clear"
+        os.system("clear")
+
 def GetOS():
     _SystemOS_ = platform.strip()
     Debug("startup(): _SystemOS_",_SystemOS_,True)
@@ -33,6 +39,7 @@ def GetOS():
 
 def main():
     oper = GetOS()
+    OSClear(oper)
     Debug('oper', oper, True)
     if(oper == 'debian'):
         os.system('sudo apt-get -y update')

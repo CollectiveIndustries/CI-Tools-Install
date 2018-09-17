@@ -49,14 +49,9 @@ def prog_check(program):
 	p.communicate()
 	prog = p.returncode == 0
 	if prog == 1:
-		return '{}Installed{}{}'.format(color.OKGREEN,file,color.END)
+		return color.OKGREEN + 'Installed' + color.END
 	else:
-		return 'Not Installed'
-
-def git():
-	# GitHub Installation
-	subprocess.call('clear')
-	print('This is were the github installation function will go')
+		return color.FAIL + 'Not Installed' + color.END
 	
 if user == '':
 	users = uname
@@ -66,8 +61,9 @@ else:
 def init():
 	subprocess.call('clear')
 	if platform == 'linux' or platform == 'linux2':
-		# linux    
+		# linux
 		with open('/etc/os-release') as file:
+			global oper
 			oper = file.readlines()
 			oper = oper[5].split('=')
 			oper = oper[1]
@@ -87,11 +83,16 @@ def main():
 	print("")
 	print('1. GitHUB    - ' + str(prog_check('git')))
 	print('2. GCC       - ' + str(prog_check('gcc')))
+	print('3. Teamspeak - ' + str(prog_check('teamspeak')))
 	
 	choice = input('Choice: ')
 	
-	if choice == '1':
+	if choice == 1:
 		git()
 		
-	
+def git():
+	# GitHub Installation
+	subprocess.call('clear')
+	print('This is were the github installation function will go')
+		
 main()

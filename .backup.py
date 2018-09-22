@@ -4,7 +4,7 @@
 ######################################
 ##									##
 ##		Collective Industries		##
-##		 GitHub Installation		##
+##		 Tools Installation			##
 ##									##
 ##		  By: Levi & Andrew			##
 ##				©2018				##
@@ -28,20 +28,6 @@ def init():
 			oper = oper[5].split('=')
 			oper = oper[1].strip()
 			
-			
-def GetOS():
-	_SystemOS_ = platform.strip()
-	Debug("startup(): _SystemOS_",_SystemOS_,True)
-	if (_SystemOS_ == 'linux' or _SystemOS_ == 'linux2'):# linux 
-		with open('/etc/os-release') as file: 
-			oper = file.readlines() 
-			oper = oper[5].split('=') 
-			return oper[1].strip() # Grab OS release Name we want to know what flavor of lenny we use. 
-		elif(_SystemOS_ == 'win32'): 
-			return _SystemOS_
-				
-
-
 def main():
 	init()
 	Debug('oper', oper, True)
@@ -51,14 +37,4 @@ def main():
 		os.system('sudo apt-get -y install git')
 		print('Running Debian OS')
 			
-	oper = GetOS()
-	
-	if(oper == 'debian'):
-		os.system('sudo apt-get -y update')
-		os.system('sudo apt-get -y upgrade')
-		os.system('sudo apt-get -y install git')
-		print('Running Debian OS')
-	else:
-		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
-
 main()	

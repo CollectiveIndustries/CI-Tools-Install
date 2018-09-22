@@ -1,13 +1,7 @@
 #!/usr/bin/env python
 #coding:utf8
 
-######################################
-##									##
-##		Collective Industries		##
-##		 	CIFS Filesystem			####		  	  Installer				##
-##		   By: Levi & Andrew		##
-##				©2018				##
-######################################
+
 
 ############
 ## Import ##

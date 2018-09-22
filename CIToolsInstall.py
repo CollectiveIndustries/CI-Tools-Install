@@ -32,7 +32,7 @@ user = pwd.getpwuid(os.getuid())[4]
 uname = getpass.getuser()
 os_name	= os.name
 user = user.replace(',', '')
-_sleep_ = 5
+_sleep_ = 2
 #############
 ## Classes ##
 #############
@@ -100,14 +100,17 @@ def git():
 def cifs():
 	# CIFS Installation
 	OSClear(oper)
-	if str(prog_check('cifs-utils')) == False:
+	Debug('CIFS Program Check', str(prog_check('cifs-utils')), False)
+	time.sleep(_sleep_)
+	if prog_check('cifs-utils') == False:
 		print('Getting ready to install CIFS Filesystem.')
 		time.sleep(_sleep_)
-		os.system('wget https://github.com/hammerzaine/CI-Tools-Install/blob/master/cifs_install.py')
+		os.system('sudo wget https://github.com/hammerzaine/CI-Tools-Install/blob/master/cifs_install.py')
+		os.system('sudo chmod +x cifs_install.py')
 		os.system('./cifs_install.py')
 		print('CIFS Filesystem is now installed')
 		time.sleep(_sleep_)
-		os.system('sudo rm -y cifs_install.py')
+		os.system('sudo rm cifs_install.py')
 		main()
 	else:
 		# CIFS Uninstaller
@@ -115,6 +118,7 @@ def cifs():
 		yn = input('Y/N: ')
 		if yn.lower() == 'y':
 			os.system('sudo apt-get remove -y cifs-utils')
+			main()
 		else:
 			main()
 ##############
@@ -152,12 +156,12 @@ def OSClear(osname):
               
 # Checks to see if a program is installed or not
 def prog_check(program): 
-	check = shutil.which(program) is not None
-	if check == True:
-		return colorPrint ('Installed',color.OKGREEN)
-	else:
-		return colorPrint ('Not Installed',color.FAIL)
-	# return shutil.which(program) is not None
+	#check = shutil.which(program) is not None
+	#if check == True:
+	#	return colorPrint ('Installed',color.OKGREEN)
+	#else:
+	#	return colorPrint ('Not Installed',color.FAIL)
+	return shutil.which(program) is not None
 
 # Initial function	
 def init():
@@ -192,12 +196,27 @@ def main():
 	print ('4. Set IP to Static/Dynamic')
 	print ('5. Config 2')
 	print ('')
+	print ('0. Exit')
+	print ('')
 	
 	for case in switch(input('Select: ')):
+		if case("0"):
+			exit()
+			break
 		if case("1"):
+			OSClear(oper)
 			print("Running GitHub install/uninstall")
 			time.sleep(_sleep_)
 			git()
+			break
+		if case("2"):
+			pass
+			break
+		if case("3"):
+			OSClear(oper)
+			print("Running CIFS Filesystem install/uninstall")
+			time.sleep(_sleep_)
+			cifs()
 			break
 	
 ##################

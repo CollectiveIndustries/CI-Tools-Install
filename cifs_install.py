@@ -1,11 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 #coding:utf8
 
 ######################################
 ##									##
 ##		Collective Industries		##
-##		 	CIFS Filesystem			##
-##		  	  Installer				##
+##		 	CIFS Filesystem			####		  	  Installer				##
 ##		   By: Levi & Andrew		##
 ##				©2018				##
 ######################################
@@ -50,6 +49,7 @@ def init():
 	# Checks to see what O/S yor running and set the variable
 	global oper
 	oper = GetOS()
+	main()
 	
 def main():
 	if(oper == 'debian'):
@@ -59,3 +59,4 @@ def main():
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
 
+init()

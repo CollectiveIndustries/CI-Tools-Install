@@ -55,9 +55,9 @@ def init():
 def main():
 	if(oper == 'debian'):
 		Debug('oper', oper, True)
-		#os.system('sudo apt-get -y update')
-		#os.system('sudo apt-get -y upgrade')
-		#os.system('sudo apt-get install -y cifs-utils')
+		os.system('sudo apt-get -y update')
+		os.system('sudo apt-get -y upgrade')
+		os.system('sudo apt-get install -y cifs-utils')
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
 

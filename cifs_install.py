@@ -54,7 +54,7 @@ def init():
 	
 def main():
 	if(oper == 'debian'):
-		Debug('oper', oper, True)
+		Debug('oper', oper, False)
 		os.system('sudo apt-get -y update')
 		os.system('sudo apt-get -y upgrade')
 		os.system('sudo apt-get install -y cifs-utils')

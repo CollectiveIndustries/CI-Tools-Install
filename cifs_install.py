@@ -1,7 +1,14 @@
 #!/usr/bin/env python
 #coding:utf8
 
-
+######################################
+##									##
+##		Collective Industries		##
+##		 	CIFS Filesystem			##
+##		  	  Installer				##
+##		   By: Levi & Andrew		##
+##				©2018				##
+######################################
 
 ############
 ## Import ##
@@ -47,9 +54,10 @@ def init():
 	
 def main():
 	if(oper == 'debian'):
-		os.system('sudo apt-get -y update')
-		os.system('sudo apt-get -y upgrade')
-		os.system('sudo apt-get install -y cifs-utils')
+		Debug('oper', oper, True)
+		#os.system('sudo apt-get -y update')
+		#os.system('sudo apt-get -y upgrade')
+		#os.system('sudo apt-get install -y cifs-utils')
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
 

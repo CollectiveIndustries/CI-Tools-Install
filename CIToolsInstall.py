@@ -89,7 +89,8 @@ def git():
 		main()
 	else:
 		# GitHub Uninstaller
-		print('Are you sure you want to remove GitHub from your machine. \nYou can always Reinstall it later.')
+		print('Are you sure you want to remove GitHub from your machine.')
+		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
 		if yn.lower() == 'y':
 			print('Remove github here')
@@ -107,14 +108,15 @@ def cifs():
 		time.sleep(_sleep_)
 		os.system('sudo wget https://github.com/hammerzaine/CI-Tools-Install/blob/master/cifs_install.py')
 		os.system('sudo chmod +x cifs_install.py')
-		os.system('./cifs_install.py')
+		os.system('sudo ./cifs_install.py')
 		print('CIFS Filesystem is now installed')
 		time.sleep(_sleep_)
 		os.system('sudo rm cifs_install.py')
 		main()
 	else:
 		# CIFS Uninstaller
-		print('Are you sure you want to remove CIFS Filesytem from your machine. \nYou can always Reinstall it later.')
+		print ('Are you sure you want to remove CIFS Filesytem from your machine.')
+		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
 		if yn.lower() == 'y':
 			os.system('sudo apt-get remove -y cifs-utils')
@@ -156,11 +158,6 @@ def OSClear(osname):
               
 # Checks to see if a program is installed or not
 def prog_check(program): 
-	#check = shutil.which(program) is not None
-	#if check == True:
-	#	return colorPrint ('Installed',color.OKGREEN)
-	#else:
-	#	return colorPrint ('Not Installed',color.FAIL)
 	return shutil.which(program) is not None
 
 # Initial function	

@@ -58,7 +58,7 @@ def main():
 	#Debug('oper', oper, False)
 	oper = GetOS()	
 	if(oper == 'debian'):
-		nic = input('Are you wanting to setup your WiFi or your Eithernet? [W/E]: ')
+		nic = raw_input('Are you wanting to setup your WiFi or your Eithernet? [W/E]: ')
 	if nic.lower() == 'w':
 		# Setting up WiFi IP 
 		cname = input('What is the name of your WiFi Adapter? [wlan0]: ')

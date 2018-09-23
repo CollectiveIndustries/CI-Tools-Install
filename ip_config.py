@@ -71,6 +71,11 @@ def main():
 		cname = raw_input('What is the name of your Eithernet Adapter? [eth0]: ')
 		if cname == None:
 			cname = 'eth0'
+			_file_ = open('/etc/network/interfaces', 'w').read().find(cname)
+			if _file_ = True:
+				print ('Found')
+			else:
+				print ('Not Found')
 		else:
 			cname = cname
 	else:

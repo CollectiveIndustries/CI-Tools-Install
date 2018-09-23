@@ -98,7 +98,6 @@ def git():
 		os.system('sudo rm -y git_install.py')
 		main()
 	
-
 # GitHub Instal/Uninstall Function
 def gcc():
 	# GCC Installation
@@ -123,7 +122,6 @@ def gcc():
 		os.system('sudo rm -y gcc_install.py')
 		main()
 				
-
 # CIFS Filesystem Install/Uninstall
 def cifs():
 	# CIFS Installation
@@ -168,7 +166,7 @@ def ssh():
 		os.system('sudo rm ssh_install.py')
 		main()
 	else:
-		# CIFS Uninstaller
+		# SSH Uninstaller
 		print ('Are you sure you want to remove SSH Server from your machine.')
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
@@ -178,33 +176,22 @@ def ssh():
 		else:
 			main()
 
-# SSH Server Install/Uninstall
-def sql():
-	# SSH Installation
+####################
+## Configurations ##
+####################
+# IP Configuration
+def IP():
 	OSClear(oper)
-	Debug('SSH Program Check', str(prog_check('openssh-server')), False)
+	print('Getting ready to Reconfigure your IP')
 	time.sleep(_sleep_)
-	if prog_check('openssh-server') == False:
-		print('Getting ready to install SSH Server.')
-		time.sleep(_sleep_)
-		os.system('sudo wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/ssh_install.py')
-		os.system('sudo chmod +x ssh_install.py')
-		os.system('python ssh_install.py')
-		print('SSH Server is now installed')
-		time.sleep(_sleep_)
-		os.system('sudo rm ssh_install.py')
-		main()
-	else:
-		# CIFS Uninstaller
-		print ('Are you sure you want to remove SSH Server from your machine.')
-		print ('You can always Reinstall it later.')
-		yn = input('Y/N: ')
-		if yn.lower() == 'y':
-			os.system('sudo apt-get --purge remove -y openssh-server')
-			main()
-		else:
-			main()
-			
+	os.system('wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/ip_config.py')
+	os.system('sudo chmod +x ip_config.py')
+	os.system('python ip_config.py')
+	print('Your IP is now Configured')
+	time.sleep(_sleep_)
+	os.system('sudo rm ip_config.py')
+	main()			
+
 ##############
 ##Functions ##
 ##############
@@ -334,6 +321,12 @@ def main():
 			print("Running SSH Server install/uninstall")
 			time.sleep(_sleep_)
 			ssh()
+			break
+		if case("8"):
+			OSClear(oper)
+			print("Running IP Configuration")
+			time.sleep(_sleep_)
+			IP()
 			break
 	
 ##################

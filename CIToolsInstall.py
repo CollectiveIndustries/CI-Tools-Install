@@ -98,7 +98,6 @@ def git():
 		os.system('sudo rm -y git_install.py')
 		main()
 	
-
 # GitHub Instal/Uninstall Function
 def gcc():
 	# GCC Installation
@@ -123,7 +122,6 @@ def gcc():
 		os.system('sudo rm -y gcc_install.py')
 		main()
 				
-
 # CIFS Filesystem Install/Uninstall
 def cifs():
 	# CIFS Installation
@@ -152,7 +150,7 @@ def cifs():
 			main()
 
 # SSH Server Install/Uninstall
-def mysql():
+def ssh():
 	# SSH Installation
 	OSClear(oper)
 	Debug('SSH Program Check', str(prog_check('openssh-server')), False)
@@ -168,7 +166,7 @@ def mysql():
 		os.system('sudo rm ssh_install.py')
 		main()
 	else:
-		# CIFS Uninstaller
+		# SSH Uninstaller
 		print ('Are you sure you want to remove SSH Server from your machine.')
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
@@ -177,7 +175,23 @@ def mysql():
 			main()
 		else:
 			main()
-			
+
+####################
+## Configurations ##
+####################
+# IP Configuration
+def IP():
+	OSClear(oper)
+	print('Getting ready to Reconfigure your IP')
+	time.sleep(_sleep_)
+	os.system('wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/ip_config.py')
+	os.system('sudo chmod +x ip_config.py')
+	os.system('python ip_config.py')
+	print('Your IP is now COnfigured')
+	time.sleep(_sleep_)
+	os.system('sudo rm -y ip_config.py')
+	main()			
+
 ##############
 ##Functions ##
 ##############
@@ -306,7 +320,13 @@ def main():
 			OSClear(oper)
 			print("Running SSH Server install/uninstall")
 			time.sleep(_sleep_)
-			mysql()
+			ssh()
+			break
+		if case("8"):
+			OSClear(oper)
+			print("Running IP Configuration")
+			time.sleep(_sleep_)
+			IP()
 			break
 	
 ##################

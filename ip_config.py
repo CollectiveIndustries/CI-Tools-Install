@@ -69,7 +69,7 @@ def main():
 	if nic.lower() == 'e':
 		# Setting up Ethernet IP
 		cname = raw_input('What is the name of your Eithernet Adapter? [eth0]: ')
-		if cname == '':
+		if cname == None:
 			cname = 'eth0'
 		else:
 			cname = cname

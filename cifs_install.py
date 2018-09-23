@@ -1,12 +1,12 @@
-#! /usr/bin/python
+#!/usr/bin/env python
 #coding:utf8
 
 ######################################
 ##									##
 ##		Collective Industries		##
-##		 GitHub Installation		##
-##									##
-##		  By: Levi & Andrew			##
+##		 	CIFS Filesystem			##
+##		  	  Installer				##
+##		   By: Levi & Andrew		##
 ##				©2018				##
 ######################################
 
@@ -53,15 +53,12 @@ def init():
 	main()
 	
 def main():
-	Debug('oper', oper, False)
-	oper = GetOS()	
-	gname = input('What name would you like to use?: ')
 	if(oper == 'debian'):
+		Debug('oper', oper, False)
 		os.system('sudo apt-get -y update')
 		os.system('sudo apt-get -y upgrade')
-		os.system('sudo apt-get -y install git')
-		os.system('git config --global user.name "',gname,'"')
+		os.system('sudo apt-get install -y cifs-utils')
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
 
-init()	
+init()

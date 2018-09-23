@@ -1,6 +1,5 @@
 # CI-Tools-Install
 
-Started new Installation file
-Created Main Menu
-Have it welcome you in your name if you have one or username if you don't
-Checks if program is installed or not and lets you know on the main menu
+This script is made for Collective Industries. It is or installations of
+programs that we use often as well as a few configuration options that
+we configure with every new server install.

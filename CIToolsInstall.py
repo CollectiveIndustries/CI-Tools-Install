@@ -189,7 +189,7 @@ def IP():
 	os.system('python ip_config.py')
 	print('Your IP is now COnfigured')
 	time.sleep(_sleep_)
-	os.system('sudo rm -y ip_config.py')
+	os.system('sudo rm ip_config.py')
 	main()			
 
 ##############

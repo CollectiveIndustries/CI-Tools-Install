@@ -72,7 +72,7 @@ def main():
 		if cname == None:
 			cname = 'eth0'
 			_file_ = open('/etc/network/interfaces', 'w').read().find(cname)
-			if _file_ = True:
+			if _file_ == True:
 				print ('Found')
 			else:
 				print ('Not Found')

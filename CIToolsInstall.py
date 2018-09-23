@@ -152,7 +152,7 @@ def cifs():
 			main()
 
 # SSH Server Install/Uninstall
-def cifs():
+def mysql():
 	# SSH Installation
 	OSClear(oper)
 	Debug('SSH Program Check', str(prog_check('openssh-server')), False)
@@ -213,11 +213,11 @@ def OSClear(osname):
               
 # Checks to see if a program is installed or not
 def prog_check(program): 
-	#return shutil.which(program) is not None
-	chk = os.system('aptitude show ' + program)
+	return shutil.which(program) is not None
+	#chk = os.system('aptitude show ' + program)
 	#chk = file.readlines()
-	chk = chk[1].split(':')
-	return chk[1].strip()
+	#chk = chk[1].split(':')
+	#return chk[1].strip()
 	
 	#if :
 	#	return colorPrint('Installed',color.OKGREEN)
@@ -229,6 +229,9 @@ def chk_install():
 	global _gcc_
 	global _cifs_
 	global _sshs_
+	global _sql_
+	global _mdb_
+	global _apa_
 	_git_ = str(prog_check('git'))
 	_gcc_ = str(prog_check('build-essential'))
 	_cifs_ = str(prog_check('cifs-utils'))
@@ -277,8 +280,8 @@ def main():
 	print ('E. Exit')
 	print ('')
 	
-	for case in switch(input('Select: ')):
-		if case("e").lower():
+	for case in switch(input('Select: ').lower()):
+		if case("e"):
 			exit()
 			break
 		if case("1"):

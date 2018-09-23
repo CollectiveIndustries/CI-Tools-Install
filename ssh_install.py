@@ -50,9 +50,11 @@ def init():
 	# Checks to see what O/S yor running and set the variable
 	global oper
 	oper = GetOS()
+	return oper
 	main()
 	
 def main():
+	init()
 	Debug('oper', oper, False)
 	oper = GetOS()	
 	gname = input('What name would you like to use?: ')
@@ -62,5 +64,5 @@ def main():
 		os.system('sudo apt-get -y install openssh-server')
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
-
-init()	
+		
+main()

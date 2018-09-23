@@ -16,13 +16,13 @@
 #############
 from sys import platform
 import shutil
-import distutils.spawn
 import os
 import subprocess
 import getpass
 import pwd
 import getpass
 import time
+import apt #For file checking
 
 ###############
 ## Variables ##
@@ -78,7 +78,16 @@ class switch(object):
 def git():
 	# GitHub Installation
 	OSClear(oper)
-	if str(prog_check('git')) == False:
+	if str(prog_check('git')) == 'Installed':
+		# GitHub Uninstaller
+		print('Are you sure you want to remove GitHub from your machine.')
+		print ('You can always Reinstall it later.')
+		yn = input('Y/N: ')
+		if yn.lower() == 'y':
+			os.system('sudo apt-get --purge remove -y git')
+		else:
+			main()
+	else:
 		print('Getting ready to install GitHub.')
 		time.sleep(_sleep_)
 		os.system('wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/git_install.py')
@@ -88,21 +97,22 @@ def git():
 		time.sleep(_sleep_)
 		os.system('sudo rm -y git_install.py')
 		main()
-	else:
-		# GitHub Uninstaller
-		print('Are you sure you want to remove GitHub from your machine.')
-		print ('You can always Reinstall it later.')
-		yn = input('Y/N: ')
-		if yn.lower() == 'y':
-			os.system('sudo apt-get --purge remove -y git')
-		else:
-			main()
+	
 
 # GitHub Instal/Uninstall Function
 def gcc():
 	# GCC Installation
 	OSClear(oper)
-	if str(prog_check('gcc')) == False:
+	if prog_check('build-essential') == 'Installed':
+		# GCC Uninstaller
+		print('Are you sure you want to remove GCC from your machine.')
+		print ('You can always Reinstall it later.')
+		yn = input('Y/N: ')
+		if yn.lower() == 'y':
+			os.system('sudo apt-get --purge remove -y build-essential')
+		else:
+			main()
+	else:
 		print('Getting ready to install GCC.')
 		time.sleep(_sleep_)
 		os.system('wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/gcc_install.py')
@@ -112,15 +122,7 @@ def gcc():
 		time.sleep(_sleep_)
 		os.system('sudo rm -y gcc_install.py')
 		main()
-	else:
-		# GCC Uninstaller
-		print('Are you sure you want to remove GCC from your machine.')
-		print ('You can always Reinstall it later.')
-		yn = input('Y/N: ')
-		if yn.lower() == 'y':
-			os.system('sudo apt-get --purge remove -y gcc')
-		else:
-			main()			
+				
 
 # CIFS Filesystem Install/Uninstall
 def cifs():
@@ -148,6 +150,34 @@ def cifs():
 			main()
 		else:
 			main()
+
+# SSH Server Install/Uninstall
+def cifs():
+	# SSH Installation
+	OSClear(oper)
+	Debug('SSH Program Check', str(prog_check('openssh-server')), False)
+	time.sleep(_sleep_)
+	if prog_check('openssh-server') == False:
+		print('Getting ready to install SSH Server.')
+		time.sleep(_sleep_)
+		os.system('sudo wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/ssh_install.py')
+		os.system('sudo chmod +x ssh_install.py')
+		os.system('python ssh_install.py')
+		print('SSH Server is now installed')
+		time.sleep(_sleep_)
+		os.system('sudo rm ssh_install.py')
+		main()
+	else:
+		# CIFS Uninstaller
+		print ('Are you sure you want to remove SSH Server from your machine.')
+		print ('You can always Reinstall it later.')
+		yn = input('Y/N: ')
+		if yn.lower() == 'y':
+			os.system('sudo apt-get --purge remove -y openssh-server')
+			main()
+		else:
+			main()
+			
 ##############
 ##Functions ##
 ##############
@@ -183,13 +213,36 @@ def OSClear(osname):
               
 # Checks to see if a program is installed or not
 def prog_check(program): 
-	return shutil.which(program) is not None
-
+	#return shutil.which(program) is not None
+	chk = os.system('aptitude show ' + program)
+	#chk = file.readlines()
+	chk = chk[1].split(':')
+	return chk[1].strip()
+	
+	#if :
+	#	return colorPrint('Installed',color.OKGREEN)
+	#else:
+	#	return colorPrint('Not Installed',color.FAIL)
+		
+def chk_install():
+	global _git_
+	global _gcc_
+	global _cifs_
+	global _sshs_
+	_git_ = str(prog_check('git'))
+	_gcc_ = str(prog_check('build-essential'))
+	_cifs_ = str(prog_check('cifs-utils'))
+	_sshs_ = str(prog_check('openssh-server'))
+	_sql_ = str(prog_check('mysql-server'))
+	_mdb_ = str(prog_check('mariadb-server'))
+	_apa_ = str(prog_check('apache2'))
+	
 # Initial function	
 def init():
 	# Checks to see what O/S yor running and set the variable
 	global oper
 	oper = GetOS()
+	chk_install()
 	# Checks to see if to use username or real name
 	global users
 	if user == '':
@@ -203,26 +256,29 @@ def init():
 # Main function
 def main():
 	OSClear(oper)
-	##########
-	## Menu ##
-	##########
+	###############
+	## Main Menu ##
+	###############
 	print ('Welcome',users,'to the Collective Industries Tools.')
 	print ('')
 	print ('Installations')
-	print ('1. GitHUB          -',str(prog_check('git')))
-	print ('2. GCC             -',str(prog_check('gcc')))
-	print ('3. CIFS Filesystem -',str(prog_check('cifs-utils')))
-	print ('1. SSH Server      -',str(prog_check('openssh')))
+	print ('1. GitHub          - ' + _git_)
+	print ('2. GCC             - ' + _gcc_)
+	print ('3. CIFS Filesystem - ' + _cifs_)
+	print ('4. SSH Server      - ' + _sshs_)
+	print ('5. MySQL Server    - ' + _sql_)
+	print ('6. MariaDB Server  - ' + _mdb_)
+	print ('7. Apache          - ' + _apa_)
 	print ('')
 	print ('Configurations')
-	print ('4. Set IP to Static/Dynamic')
-	print ('5. Config 2')
+	print ('8. Set IP to Static/Dynamic')
+	print ('9. Config 2')
 	print ('')
-	print ('0. Exit')
+	print ('E. Exit')
 	print ('')
 	
 	for case in switch(input('Select: ')):
-		if case("0"):
+		if case("e").lower():
 			exit()
 			break
 		if case("1"):
@@ -242,6 +298,12 @@ def main():
 			print("Running CIFS Filesystem install/uninstall")
 			time.sleep(_sleep_)
 			cifs()
+			break
+		if case("4"):
+			OSClear(oper)
+			print("Running SSH Server install/uninstall")
+			time.sleep(_sleep_)
+			mysql()
 			break
 	
 ##################

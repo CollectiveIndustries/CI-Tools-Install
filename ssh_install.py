@@ -57,7 +57,6 @@ def main():
 	init()
 	#Debug('oper', oper, False)
 	oper = GetOS()	
-	gname = input('What name would you like to use?: ')
 	if(oper == 'debian'):
 		os.system('sudo apt-get -y update')
 		os.system('sudo apt-get -y upgrade')

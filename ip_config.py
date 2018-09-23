@@ -59,20 +59,20 @@ def main():
 	oper = GetOS()	
 	if(oper == 'debian'):
 		nic = input('Are you wanting to setup your WiFi or your Eithernet? [W/E]: ')
-		if nic.lower() == 'w':
-			# Setting up WiFi IP 
-			cname = input('What is the name of your WiFi Adapter? [wlan0]: ')
-			if cname == '':
-				cname = 'wlan0'
-			else:
-				cname = cname			
-		if nic.lower() == 'e':
-			# Setting up Ethernet IP
-			cname = input('What is the name of your Eithernet Adapter? [eth0]: ')
-			if cname == '':
-				cname = 'eth0'
-			else:
-				cname = cname
+	if nic.lower() == 'w':
+		# Setting up WiFi IP 
+		cname = input('What is the name of your WiFi Adapter? [wlan0]: ')
+		if cname == '':
+			cname = 'wlan0'
+		else:
+			cname = cname			
+	if nic.lower() == 'e':
+		# Setting up Ethernet IP
+		cname = input('What is the name of your Eithernet Adapter? [eth0]: ')
+		if cname == '':
+			cname = 'eth0'
+		else:
+			cname = cname
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
 		

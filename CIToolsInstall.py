@@ -82,7 +82,8 @@ def git():
 		print('Getting ready to install GitHub.')
 		time.sleep(_sleep_)
 		os.system('wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/git_install.py')
-		os.system('./git_install.py')
+		os.system('sudo chmod +x git_install.py')
+		os.system('python git_install.py')
 		print('GitHub is now installed')
 		time.sleep(_sleep_)
 		os.system('sudo rm -y git_install.py')
@@ -93,10 +94,34 @@ def git():
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
 		if yn.lower() == 'y':
-			print('Remove github here')
+			os.system('sudo apt-get --purge remove -y git')
 		else:
 			main()
-			
+
+# GitHub Instal/Uninstall Function
+def git():
+	# GCC Installation
+	OSClear(oper)
+	if str(prog_check('gcc')) == False:
+		print('Getting ready to install GCC.')
+		time.sleep(_sleep_)
+		os.system('wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/gcc_install.py')
+		os.system('sudo chmod +x gcc_install.py')
+		os.system('python gcc_install.py')
+		print('GCC is now installed')
+		time.sleep(_sleep_)
+		os.system('sudo rm -y gcc_install.py')
+		main()
+	else:
+		# GCC Uninstaller
+		print('Are you sure you want to remove GCC from your machine.')
+		print ('You can always Reinstall it later.')
+		yn = input('Y/N: ')
+		if yn.lower() == 'y':
+			os.system('sudo apt-get --purge remove -y gcc')
+		else:
+			main()			
+
 # CIFS Filesystem Install/Uninstall
 def cifs():
 	# CIFS Installation
@@ -119,7 +144,7 @@ def cifs():
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
 		if yn.lower() == 'y':
-			os.system('sudo apt-get remove -y cifs-utils')
+			os.system('sudo apt-get --purge remove -y cifs-utils')
 			main()
 		else:
 			main()
@@ -207,7 +232,10 @@ def main():
 			git()
 			break
 		if case("2"):
-			pass
+			OSClear(oper)
+			print("Running GCC install/uninstall")
+			time.sleep(_sleep_)
+			gcc()
 			break
 		if case("3"):
 			OSClear(oper)

@@ -74,7 +74,7 @@ def main():
 			cname = 'eth0'
 			with fileinput.FileInput('/etc/network/interfaces', implace=True, backup='.bak') as file:
 				for line in file:
-					print(line.replace(cname, 'replacement text'), end='')
+					print(line.replace(cname, 'replacement text'))
 		else:
 			cname = cname
 	else:

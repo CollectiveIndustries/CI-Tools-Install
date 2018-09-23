@@ -55,7 +55,7 @@ def init():
 	
 def main():
 	init()
-	Debug('oper', oper, False)
+	#Debug('oper', oper, False)
 	oper = GetOS()	
 	gname = input('What name would you like to use?: ')
 	if(oper == 'debian'):

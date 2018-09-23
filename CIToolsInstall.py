@@ -99,7 +99,7 @@ def git():
 			main()
 
 # GitHub Instal/Uninstall Function
-def git():
+def gcc():
 	# GCC Installation
 	OSClear(oper)
 	if str(prog_check('gcc')) == False:

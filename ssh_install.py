@@ -1,11 +1,12 @@
-#!/usr/bin/env python
+#! /usr/bin/python
 #coding:utf8
 
 ######################################
 ##									##
 ##		Collective Industries		##
-##		 	GCC Installer			##
-##		   By: Levi & Andrew		##
+##	   SSH Server Installation		##
+##									##
+##		  By: Levi & Andrew			##
 ##				©2018				##
 ######################################
 
@@ -49,15 +50,20 @@ def init():
 	# Checks to see what O/S yor running and set the variable
 	global oper
 	oper = GetOS()
+	return oper
 	main()
 	
 def main():
+	init()
+	#Debug('oper', oper, False)
+	oper = GetOS()	
 	if(oper == 'debian'):
-		Debug('oper', oper, False)
 		os.system('sudo apt-get -y update')
 		os.system('sudo apt-get -y upgrade')
-		os.system('sudo apt-get install -y build-essential')
+		os.system('sudo apt-get -y install openssh-server')
+		os.system('sudo systemctl start ssh.service')
+		os.system('sudo systemctl enable ssh.service')
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
-
-init()
+		
+main()

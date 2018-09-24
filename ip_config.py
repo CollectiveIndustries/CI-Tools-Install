@@ -1,11 +1,12 @@
-#!/usr/bin/env python
+#! /usr/bin/env python3
 #coding:utf8
 
 ######################################
 ##									##
 ##		Collective Industries		##
-##		 	GCC Installer			##
-##		   By: Levi & Andrew		##
+##	   SSH Server Installation		##
+##									##
+##		  By: Levi & Andrew			##
 ##				©2018				##
 ######################################
 
@@ -13,6 +14,7 @@
 ## Import ##
 ############
 from sys import platform
+import fileinput
 import os
 
 ###############
@@ -49,15 +51,33 @@ def init():
 	# Checks to see what O/S yor running and set the variable
 	global oper
 	oper = GetOS()
+	return oper
 	main()
 	
 def main():
+	init()
+	#Debug('oper', oper, False)
+	oper = GetOS()	
 	if(oper == 'debian'):
-		Debug('oper', oper, False)
-		os.system('sudo apt-get -y update')
-		os.system('sudo apt-get -y upgrade')
-		os.system('sudo apt-get install -y build-essential')
+		nic = raw_input('Are you wanting to setup your WiFi or your Eithernet? [W/E]: ')
+	if nic.lower() == 'w':
+		# Setting up WiFi IP 
+		cname = raw_input('What is the name of your WiFi Adapter? [wlan0]: ')
+		if cname == '':
+			cname = 'wlan0'
+		else:
+			cname = cname			
+	if nic.lower() == 'e':
+		# Setting up Ethernet IP
+		cname = raw_input('What is the name of your Eithernet Adapter? [eth0]: ')
+		if cname == None:
+			cname = 'eth0'
+			with fileinput.FileInput('/etc/network/interfaces', implace=True, backup='.bak') as file:
+				for line in file:
+					print(line.replace(cname, 'replacement text'))
+		else:
+			cname = cname
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
-
-init()
+		
+main()

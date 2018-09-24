@@ -48,17 +48,27 @@ _sleep_ = 2
 ##################
 ## Menu Builder ##
 ##################
-MainMenu_Items = {"1":["GitHub", MyOS.ProgExists('git')],
-                  "2":["GCC",MyOS.ProgExists('build-essential')],
-                  "3":["CIFS Filesystem",MyOS.ProgExists('cifs-utils')],
-                  "4":["SSH Server",MyOS.ProgExists('openssh-server')],
-                  "5":["MySQL Server",MyOS.ProgExists('mysql-server')],
-                  "6":["MariaDB Server",MyOS.ProgExists('mariadb-server')],
-                  "7":["Apache",MyOS.ProgExists('apache2')],
-                  "-1":["\nConfigurations\n"],
-                  "8":["Set IP to Static/Dynamic","\n"],
-                  "E":["Exit","Closes terminal window"]}
-MyMenu = menu.TextMenu(MainMenu_Items)
+ProgramMenu_Header = ["Option","Program","Installed"]
+ProgramMenu_Items  = {"1":["GitHub", MyOS.ProgExists('git')],
+                      "2":["GCC",MyOS.ProgExists('build-essential')],
+                      "3":["CIFS Filesystem",MyOS.ProgExists('cifs-utils')],
+                      "4":["SSH Server",MyOS.ProgExists('openssh-server')],
+                      "5":["MySQL Server",MyOS.ProgExists('mysql-server')],
+                      "6":["MariaDB Server",MyOS.ProgExists('mariadb-server')],
+                      "7":["Apache",MyOS.ProgExists('apache2')]}
+
+OptionsMenu_Header = ["", "Settings"]
+OptionsMenu_Items  = {"8":["IP Config"],
+                      "E":["Exit"]
+                     }
+
+ProgramMenu = menu.TextMenu(ProgramMenu_Items,ProgramMenu_Header)
+ProgramMenu.Align(ProgramMenu_Header[0],"c")
+ProgramMenu.Align(ProgramMenu_Header[1],"l")
+ProgramMenu.Align(ProgramMenu_Header[2],"r")
+
+OptionsMenu = menu.TextMenu(OptionsMenu_Items,OptionsMenu_Header)
+OptionsMenu.Align(OptionsMenu_Header[1],"l")
 
 #########################################
 ## Program Install/Uninstall Functions ##
@@ -231,8 +241,9 @@ def main():
     print('Welcome',users,'to the Collective Industries Tools.')
     print('')
     print('Installations')
-    MyMenu.Print()
-    print('')
+    ProgramMenu.Print()
+    OptionsMenu.Print()
+    print("")
 
     for case in com.switch(input('Select: ').lower()):
         if case("e"):

@@ -24,6 +24,8 @@ import pwd
 import getpass
 import time
 
+from lib import com
+
 ###############
 ## Variables ##
 ###############
@@ -33,43 +35,6 @@ uname = getpass.getuser()
 os_name	= os.name
 user = user.replace(',', '')
 _sleep_ = 2
-#############
-## Classes ##
-#############
-# Text output color definitions
-class color:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    END = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-	
-# This class provides the functionality we want. You only need to look at
-# this if you want to know how this works. It only needs to be defined
-# once, no need to muck around with its internals.
-# Located at http://code.activestate.com/recipes/410692/
-class switch(object):
-    def __init__(self, value):
-        self.value = value
-        self.fall = False
-
-    def __iter__(self):
-        """Return the match method once, then stop"""
-        yield self.match
-        raise StopIteration
-
-    def match(self, *args):
-        """Indicate whether or not to enter a case suite"""
-        if self.fall or not args:
-            return True
-        elif self.value in args:
-            self.fall = True
-            return True
-        else:
-            return False
 
 #########################################
 ## Program Install/Uninstall Functions ##
@@ -77,7 +42,7 @@ class switch(object):
 # GitHub Instal/Uninstall Function
 def git():
 	# GitHub Installation
-	OSClear(oper)
+	OSClear(oper) #
 	if str(prog_check('git')) == False:
 		print('Getting ready to install GitHub.')
 		time.sleep(_sleep_)
@@ -101,7 +66,7 @@ def git():
 # GitHub Instal/Uninstall Function
 def gcc():
 	# GCC Installation
-	OSClear(oper)
+	OSClear(oper) #
 	if str(prog_check('gcc')) == False:
 		print('Getting ready to install GCC.')
 		time.sleep(_sleep_)
@@ -180,7 +145,7 @@ def OSClear(osname):
 		os.system("cls")
 	else: # well its not Windows we can just "clear"
 		os.system("clear")
-              
+
 # Checks to see if a program is installed or not
 def prog_check(program): 
 	return shutil.which(program) is not None
@@ -209,6 +174,8 @@ def main():
 	print ('Welcome',users,'to the Collective Industries Tools.')
 	print ('')
 	print ('Installations')
+
+    ## Build menu object
 	print ('1. GitHUB          -',str(prog_check('git')))
 	print ('2. GCC             -',str(prog_check('gcc')))
 	print ('3. CIFS Filesystem -',str(prog_check('cifs-utils')))
@@ -220,25 +187,26 @@ def main():
 	print ('')
 	print ('0. Exit')
 	print ('')
+    ## End Object
 	
-	for case in switch(input('Select: ')):
+	for case in com.switch(input('Select: ')):
 		if case("0"):
 			exit()
 			break
 		if case("1"):
-			OSClear(oper)
+			OSClear(oper) #
 			print("Running GitHub install/uninstall")
 			time.sleep(_sleep_)
 			git()
 			break
 		if case("2"):
-			OSClear(oper)
+			OSClear(oper) #
 			print("Running GCC install/uninstall")
 			time.sleep(_sleep_)
 			gcc()
 			break
 		if case("3"):
-			OSClear(oper)
+			OSClear(oper) #
 			print("Running CIFS Filesystem install/uninstall")
 			time.sleep(_sleep_)
 			cifs()

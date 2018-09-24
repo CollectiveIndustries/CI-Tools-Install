@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9724dd69-6dce-4e83-acb2-82e8a5245d0e}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>.backup.py</StartupFile>
+    <StartupFile>CIToolsInstall.py</StartupFile>
     <SearchPath>lib\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -29,6 +29,9 @@
     <Compile Include="lib\dbcon.py" />
     <Compile Include="lib\disk.py" />
     <Compile Include="lib\__init__.py" />
+    <Compile Include="menu.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib" />

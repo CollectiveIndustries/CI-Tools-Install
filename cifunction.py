@@ -12,6 +12,7 @@
 #############
 ## Imports ##
 #############
+from lib import com
 
 #################
 ## Main Script ##

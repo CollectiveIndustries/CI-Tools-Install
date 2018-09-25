@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-#coding:utf8
 
 ######################################
 ##									##
@@ -25,21 +24,17 @@ from lib import com
 # Build an OS Object
 MyOS = com._OS_()
 
+user = ""
 ## Unix Only Imports
 if MyOS._type_ != "win32":
     import pwd # no module found, UNIX systems ONLY
     import apt
+    user = pwd.getpwuid(os.getuid())[4]
 
 ###############
 ## Variables ##
 ###############
 global users
-
-if MyOS._type_ != "win32":
-    user = pwd.getpwuid(os.getuid())[4]
-else:
-    user = ""
-
 uname = getpass.getuser()
 os_name	= os.name
 user = user.replace(',', '')
@@ -55,10 +50,11 @@ ProgramMenu_Items  = {"1":["GitHub", MyOS.ProgExists('git')],
                       "4":["SSH Server",MyOS.ProgExists('openssh-server')],
                       "5":["MySQL Server",MyOS.ProgExists('mysql-server')],
                       "6":["MariaDB Server",MyOS.ProgExists('mariadb-server')],
-                      "7":["Apache",MyOS.ProgExists('apache2')]}
+                      "7":["Apache",MyOS.ProgExists('apache2')],
+                      "8":["Dos 2 Unix converter",MyOS.ProgExists('dos2unix')]}
 
 OptionsMenu_Header = ["", "Settings"]
-OptionsMenu_Items  = {"8":["IP Config"],
+OptionsMenu_Items  = {"9":["IP Config"],
                       "E":["Exit"]
                      }
 

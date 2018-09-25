@@ -13,13 +13,14 @@
 #############
 ## Imports ##
 #############
+from lib import com
 import shutil
 import os
 import subprocess
 import getpass
 import time
 import menu
-from lib import com
+import cifunction
 
 # Build an OS Object
 MyOS = com._OS_()
@@ -85,12 +86,9 @@ def git():
 	else:
 		print('Getting ready to install GitHub.')
 		time.sleep(_sleep_)
-		os.system('wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/git_install.py')
-		os.system('sudo chmod +x git_install.py')
-		os.system('python git_install.py')
+		git_install()
 		print('GitHub is now installed')
 		time.sleep(_sleep_)
-		os.system('sudo rm -y git_install.py')
 		main()
 	
 # GitHub Instal/Uninstall Function
@@ -109,12 +107,9 @@ def gcc():
 	else:
 		print('Getting ready to install GCC.')
 		time.sleep(_sleep_)
-		os.system('wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/gcc_install.py')
-		os.system('sudo chmod +x gcc_install.py')
-		os.system('python gcc_install.py')
+		gcc_install()
 		print('GCC is now installed')
 		time.sleep(_sleep_)
-		os.system('sudo rm -y gcc_install.py')
 		main()
 				
 # CIFS Filesystem Install/Uninstall
@@ -126,12 +121,9 @@ def cifs():
 	if MyOS.ProgExists('cifs-utils') == False:
 		print('Getting ready to install CIFS Filesystem.')
 		time.sleep(_sleep_)
-		os.system('sudo wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/cifs_install.py')
-		os.system('sudo chmod +x cifs_install.py')
-		os.system('python cifs_install.py')
+		cifs_install()
 		print('CIFS Filesystem is now installed')
 		time.sleep(_sleep_)
-		os.system('sudo rm cifs_install.py')
 		main()
 	else:
 		# CIFS Uninstaller
@@ -153,12 +145,9 @@ def ssh():
 	if MyOS.ProgExists('openssh-server') == False:
 		print('Getting ready to install SSH Server.')
 		time.sleep(_sleep_)
-		os.system('sudo wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/ssh_install.py')
-		os.system('sudo chmod +x ssh_install.py')
-		os.system('python ssh_install.py')
+		ssh_install()
 		print('SSH Server is now installed')
 		time.sleep(_sleep_)
-		os.system('sudo rm ssh_install.py')
 		main()
 	else:
 		# SSH Uninstaller
@@ -179,12 +168,9 @@ def IP():
 	MyOS.Clear()
 	print('Getting ready to Reconfigure your IP')
 	time.sleep(_sleep_)
-	os.system('wget https://raw.githubusercontent.com/hammerzaine/CI-Tools-Install/master/ip_config.py')
-	os.system('sudo chmod +x ip_config.py')
-	os.system('python ip_config.py')
+	ip_config()
 	print('Your IP is now Configured')
 	time.sleep(_sleep_)
-	os.system('sudo rm ip_config.py')
 	main()			
 
 ##############

@@ -20,10 +20,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include=".backup.py" />
-    <Compile Include="cifs_install.py" />
+    <Compile Include="cifunction.py" />
     <Compile Include="CIToolsInstall.py" />
-    <Compile Include="gcc_install.py" />
-    <Compile Include="git_install.py" />
     <Compile Include="lib\com.py" />
     <Compile Include="lib\config.py" />
     <Compile Include="lib\dbcon.py" />

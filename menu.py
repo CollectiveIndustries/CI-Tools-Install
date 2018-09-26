@@ -10,7 +10,7 @@ class TextMenu(object):
         self.Headers = ColHeaders
         if _items_ is None:
             self._items_ = {}
-            _menu_.field_names = []
+            self._menu_.field_names = []
         else:
             self._menu_.field_names = ColHeaders
             for option, text in _items_.items():
@@ -21,7 +21,7 @@ class TextMenu(object):
         possible values are l, c, r"""
         self._menu_.align[header] = alignment
 
-    def Confirm(prompt="", option=""):
+    def Confirm(self, prompt="", option=""):
         """Confirm dialog"""
         confirm = "{}{}{} {} Are you sure (y/n)?"
         answer = input(confirm.format(com.color.WARNING, prompt, com.color.END, option)).lower()
@@ -30,7 +30,7 @@ class TextMenu(object):
         else:
             return False
 
-    def GetInputNonEmpty(promt):
+    def GetInputNonEmpty(self,promt):
         """Refuse empty answers"""
         option = None
         while True:
@@ -40,7 +40,7 @@ class TextMenu(object):
             option = None
             print("{}{} cannot be empty!{}".format(com.color.FAIL,promt,com.color.END))
     
-    def GetDefaults(prompt, defval):
+    def GetDefaults(self,prompt, defval):
         """Gets data from user providing a defualt option"""
         formatstr = "{}{}:{} [ {} ] " # Header color prompt with defualt in [ ]
         response = input(formatstr.format(com.color.HEADER,prompt, com.color.END, defval))

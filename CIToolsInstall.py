@@ -14,13 +14,7 @@
 ## Imports ##
 #############
 from lib import com
-import shutil
-import os
-import subprocess
-import getpass
-import time
-import menu
-import cifunction
+import shutil, os, subprocess, getpass, time, menu, cifunction
 
 # Build an OS Object
 MyOS = com._OS_()

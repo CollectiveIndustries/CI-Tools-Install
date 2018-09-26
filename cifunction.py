@@ -53,17 +53,38 @@ def ssh_install():
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
 		
-#class mysql_install():
+def mysql_install():
+    if(oper == 'debian'):
+		os.system('sudo apt-get -y update')
+		os.system('sudo apt-get -y upgrade')
+		os.system('sudo apt-get install -y mysql-server')
+	else:
+		print("Sorry Windows is not supported at this time :( we are working on it we promise.")	
+	
+def mdb_install():
+    if(oper == 'debian'):
+		os.system('sudo apt-get -y update')
+		os.system('sudo apt-get -y upgrade')
+		os.system('sudo apt-get install -y mariadb-server')
+	else:
+		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
 	
 	
-#class mdb_install():
+def apache_install():
+    if(oper == 'debian'):
+		os.system('sudo apt-get -y update')
+		os.system('sudo apt-get -y upgrade')
+		os.system('sudo apt-get install -y apache2')
+	else:
+		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
 	
-	
-#class apache_install():
-	
-	
-#class d2u_install():
-	
+def d2u_install():
+    if(oper == 'debian'):
+		os.system('sudo apt-get -y update')
+		os.system('sudo apt-get -y upgrade')
+		os.system('sudo apt-get install -y dos2unix')
+	else:
+		print("Sorry Windows is not supported at this time :( we are working on it we promise.")	
 	
 def ip_config():
 	if(oper == 'debian'):

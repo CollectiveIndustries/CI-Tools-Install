@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 ######################################
 ##									##
 ##		Collective Industries		##
@@ -9,6 +7,12 @@
 ##				©2018				##
 ######################################
 
+# TODO rewrite progs module for use of the prefrered pythonic subprocess module
+# In the official python documentation we can read that subprocess should be used
+# for accessing system commands.
+#
+# https://docs.python.org/3/library/subprocess.html
+
 #############
 ## Imports ##
 #############
@@ -17,7 +21,7 @@ import re
 ###############
 ## Variables ##
 ###############
-MyOS =com._OS_()
+MyOS = com._OS_()
 oper = MyOS._type_
 
 #################
@@ -38,8 +42,8 @@ def word_search(file, word, rword):
 def git_install():
 	gname = input('What name would you like to use?: ')
 	if(oper == 'debian'):
-		os.system('sudo apt-get -y update')
-		os.system('sudo apt-get -y upgrade')
+		os.system('sudo apt-get -y update') #
+		os.system('sudo apt-get -y upgrade')#
 		os.system('sudo apt-get -y install git')
 		os.system('git config --global user.name "',gname,'"')
 	else:
@@ -47,24 +51,24 @@ def git_install():
 		
 def gcc_install():
 	if(oper == 'debian'):
-		os.system('sudo apt-get -y update')
-		os.system('sudo apt-get -y upgrade')
+		os.system('sudo apt-get -y update') #
+		os.system('sudo apt-get -y upgrade')#
 		os.system('sudo apt-get install -y build-essential')
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
 		
 def cifs_install():
 	if(oper == 'debian'):
-		os.system('sudo apt-get -y update')
-		os.system('sudo apt-get -y upgrade')
+		os.system('sudo apt-get -y update') #
+		os.system('sudo apt-get -y upgrade') #
 		os.system('sudo apt-get install -y cifs-utils')
 	else:
 		print("Sorry Windows is not supported at this time :( we are working on it we promise.")
 		
 def ssh_install():
 	if(oper == 'debian'):
-		os.system('sudo apt-get -y update')
-		os.system('sudo apt-get -y upgrade')
+		os.system('sudo apt-get -y update') #
+		os.system('sudo apt-get -y upgrade')#
 		os.system('sudo apt-get -y install openssh-server')
 		os.system('sudo systemctl start ssh.service')
 		os.system('sudo systemctl enable ssh.service')
@@ -73,37 +77,36 @@ def ssh_install():
 		
 def mysql_install():
     if(oper == 'debian'):
-        os.system('sudo apt-get -y update')
-        os.system('sudo apt-get -y upgrade')
+        os.system('sudo apt-get -y update') #
+        os.system('sudo apt-get -y upgrade')#
         os.system('sudo apt-get install -y mysql-server')
     else:
         print("Sorry Windows is not supported at this time :( we are working on it we promise.")	
-	
+
 def mdb_install():
     if(oper == 'debian'):
-        os.system('sudo apt-get -y update')
-        os.system('sudo apt-get -y upgrade')
+        os.system('sudo apt-get -y update') #
+        os.system('sudo apt-get -y upgrade') #
         os.system('sudo apt-get install -y mariadb-server')
     else:
         print("Sorry Windows is not supported at this time :( we are working on it we promise.")
-	
-	
+
 def apache_install():
     if(oper == 'debian'):
-        os.system('sudo apt-get -y update')
-        os.system('sudo apt-get -y upgrade')
+        os.system('sudo apt-get -y update')#
+        os.system('sudo apt-get -y upgrade')#
         os.system('sudo apt-get install -y apache2')
     else:
         print("Sorry Windows is not supported at this time :( we are working on it we promise.")
-	
+
 def d2u_install():
     if(oper == 'debian'):
-        os.system('sudo apt-get -y update')
-        os.system('sudo apt-get -y upgrade')
+        os.system('sudo apt-get -y update')#
+        os.system('sudo apt-get -y upgrade')#
         os.system('sudo apt-get install -y dos2unix')
     else:
         print("Sorry Windows is not supported at this time :( we are working on it we promise.")	
-	
+
 def ip_config():
     if(oper == 'debian'):
         nic = input('Are you wanting to setup your WiFi or your Eithernet? [W/E]: ')
@@ -132,4 +135,3 @@ def ip_config():
             cname = cname
     else:
         print("Sorry Windows is not supported at this time :( we are working on it we promise.")
-	

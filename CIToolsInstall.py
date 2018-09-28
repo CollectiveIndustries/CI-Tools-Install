@@ -14,7 +14,7 @@
 ## Imports ##
 #############
 from lib import com
-import shutil, os, subprocess, getpass, time, menu, cifunction
+import shutil, os, subprocess, getpass, time, menu, progs
 
 # Build an OS Object
 MyOS = com._OS_()
@@ -33,12 +33,12 @@ global users
 uname = getpass.getuser()
 os_name	= os.name
 user = user.replace(',', '')
-_sleep_ = 2
+DELAY = 2
 
 ##################
 ## Menu Builder ##
 ##################
-ProgramMenu_Header = ["Option","Program","Installed"]
+ProgramMenu_Header = ["#","Program","Installed"]
 ProgramMenu_Items  = {"1":["GitHub", MyOS.ProgExists('git')],
                       "2":["GCC",MyOS.ProgExists('build-essential')],
                       "3":["CIFS Filesystem",MyOS.ProgExists('cifs-utils')],
@@ -48,7 +48,7 @@ ProgramMenu_Items  = {"1":["GitHub", MyOS.ProgExists('git')],
                       "7":["Apache",MyOS.ProgExists('apache2')],
                       "8":["Dos 2 Unix converter",MyOS.ProgExists('dos2unix')]}
 
-OptionsMenu_Header = ["", "Settings"]
+OptionsMenu_Header = ["#", "Settings"]
 OptionsMenu_Items  = {"9":["IP Config"],
                       "E":["Exit"]
                      }
@@ -66,10 +66,12 @@ OptionsMenu.Align(OptionsMenu_Header[1],"l")
 #########################################
 # GitHub Instal/Uninstall Function
 def git():
-	# GitHub Installation
+	"""GitHub Installation"""
 	MyOS.Clear()
-	if str(MyOS.ProgExists('git')) == 'Installed':
+	if ProgramMenu_Items["1"][2] == 'Installed':
 		# GitHub Uninstaller
+
+        # TODO Confrim uninstall
 		print('Are you sure you want to remove GitHub from your machine.')
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
@@ -79,18 +81,20 @@ def git():
 			main()
 	else:
 		print('Getting ready to install GitHub.')
-		time.sleep(_sleep_)
+		time.sleep(DELAY)
 		git_install()
 		print('GitHub is now installed')
-		time.sleep(_sleep_)
+		time.sleep(DELAY)
 		main()
 	
-# GitHub Instal/Uninstall Function
+
 def gcc():
-	# GCC Installation
+	"""GitHub Instal/Uninstall Function"""
 	MyOS.Clear()
-	if MyOS.ProgExists('build-essential') == 'Installed':
+	if ProgramMenu_Items["2"][2] == 'Installed': 
 		# GCC Uninstaller
+
+        # TODO Wait another confirm box?
 		print('Are you sure you want to remove GCC from your machine.')
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
@@ -100,27 +104,29 @@ def gcc():
 			main()
 	else:
 		print('Getting ready to install GCC.')
-		time.sleep(_sleep_)
+		time.sleep(DELAY)
 		gcc_install()
 		print('GCC is now installed')
-		time.sleep(_sleep_)
+		time.sleep(DELAY)
 		main()
 				
 # CIFS Filesystem Install/Uninstall
 def cifs():
 	# CIFS Installation
 	MyOS.Clear()
-	Debug('CIFS Program Check', str(MyOS.ProgExists('cifs-utils')), False)
-	time.sleep(_sleep_)
-	if MyOS.ProgExists('cifs-utils') == False:
+	Debug('CIFS Program Check', ProgramMenu_Items["3"][2], False) 
+	time.sleep(DELAY)
+	if ProgramMenu_Items["3"][2] == False:
 		print('Getting ready to install CIFS Filesystem.')
-		time.sleep(_sleep_)
+		time.sleep(DELAY)
 		cifs_install()
 		print('CIFS Filesystem is now installed')
-		time.sleep(_sleep_)
+		time.sleep(DELAY)
 		main()
 	else:
 		# CIFS Uninstaller
+
+        # TODO Holy cow guess what? yup another confirm
 		print ('Are you sure you want to remove CIFS Filesytem from your machine.')
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
@@ -134,17 +140,19 @@ def cifs():
 def ssh():
 	# SSH Installation
 	MyOS.Clear()
-	Debug('SSH Program Check', str(MyOS.ProgExists('openssh-server')), False)
-	time.sleep(_sleep_)
-	if MyOS.ProgExists('openssh-server') == False:
+	Debug('SSH Program Check', ProgramMenu_Items["4"][2], False) 
+	time.sleep(DELAY)
+	if ProgramMenu_Items["4"][2] == False: 
 		print('Getting ready to install SSH Server.')
-		time.sleep(_sleep_)
+		time.sleep(DELAY)
 		ssh_install()
 		print('SSH Server is now installed')
-		time.sleep(_sleep_)
+		time.sleep(DELAY)
 		main()
 	else:
 		# SSH Uninstaller
+
+        # TODO YES!! im sure Remove the damn thing
 		print ('Are you sure you want to remove SSH Server from your machine.')
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
@@ -161,10 +169,10 @@ def ssh():
 def IP():
 	MyOS.Clear()
 	print('Getting ready to Reconfigure your IP')
-	time.sleep(_sleep_)
+	time.sleep(DELAY)
 	ip_config()
 	print('Your IP is now Configured')
-	time.sleep(_sleep_)
+	time.sleep(DELAY)
 	main()			
 
 ##############
@@ -179,19 +187,6 @@ def Debug(var1, var2, TF):
 # Print in color then reset color on end of line.
 def colorPrint(txt,colorStart):
 	print (colorStart+txt+'\033[0m')
-	
-
-
-	#chk = os.system('aptitude show ' + program)
-	#chk = file.readlines()
-	#chk = chk[1].split(':')
-	#return chk[1].strip()
-
-	#if :
-	#	return colorPrint('Installed',color.OKGREEN)
-	#else:
-	#	return colorPrint('Not Installed',color.FAIL)
-
 
 # Initial function	
 def init():
@@ -205,15 +200,11 @@ def init():
 	# Switch over to the main function
 	main()	
 	# Checks to see if python 3 is installed. If not, install it
-	
-
 
 # Main Entry Point
 def main():
+    """Main Entry point"""
     MyOS.Clear()
-    ###############
-    ## Main Menu ##
-    ###############
     print('Welcome',users,'to the Collective Industries Tools.')
     print('')
     print('Installations')
@@ -228,31 +219,31 @@ def main():
         if case("1"):
             MyOS.Clear()
             print("Running GitHub install/uninstall")
-            time.sleep(_sleep_)
+            time.sleep(DELAY)
             git()
             break
         if case("2"):
             MyOS.Clear()
             print("Running GCC install/uninstall")
-            time.sleep(_sleep_)
+            time.sleep(DELAY)
             gcc()
             break
         if case("3"):
             MyOS.Clear()
             print("Running CIFS Filesystem install/uninstall")
-            time.sleep(_sleep_)
+            time.sleep(DELAY)
             cifs()
             break
         if case("4"):
             MyOS.Clear()
             print("Running SSH Server install/uninstall")
-            time.sleep(_sleep_)
+            time.sleep(DELAY)
             ssh()
             break
         if case("8"):
             MyOS.Clear()
             print("Running IP Configuration")
-            time.sleep(_sleep_)
+            time.sleep(DELAY)
             IP()
             break
 

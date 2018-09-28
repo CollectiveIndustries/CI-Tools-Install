@@ -187,7 +187,7 @@ def main():
             MyOS.Clear()
             print("Running GitHub install/uninstall")
             time.sleep(DELAY)
-            git() # Make a task class to call values from a dict 
+            git() # TODO Make a task class to call values from a dict 
             break
         if case("2"):
             MyOS.Clear()

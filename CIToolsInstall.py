@@ -76,7 +76,7 @@ def git():
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
 		if yn.lower() == 'y':
-			os.system('sudo apt-get --purge remove -y git')
+			os.system('sudo apt-get --purge remove -y git') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
 		else:
 			main()
 	else:
@@ -99,7 +99,7 @@ def gcc():
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
 		if yn.lower() == 'y':
-			os.system('sudo apt-get --purge remove -y build-essential')
+			os.system('sudo apt-get --purge remove -y build-essential') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
 		else:
 			main()
 	else:
@@ -131,7 +131,7 @@ def cifs():
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
 		if yn.lower() == 'y':
-			os.system('sudo apt-get --purge remove -y cifs-utils')
+			os.system('sudo apt-get --purge remove -y cifs-utils') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
 			main()
 		else:
 			main()
@@ -152,12 +152,12 @@ def ssh():
 	else:
 		# SSH Uninstaller
 
-        # TODO YES!! im sure Remove the damn thing
+        # TODO YES!! I'm sure remove the damn thing
 		print ('Are you sure you want to remove SSH Server from your machine.')
 		print ('You can always Reinstall it later.')
 		yn = input('Y/N: ')
 		if yn.lower() == 'y':
-			os.system('sudo apt-get --purge remove -y openssh-server')
+			os.system('sudo apt-get --purge remove -y openssh-server') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
 			main()
 		else:
 			main()
@@ -170,7 +170,7 @@ def IP():
 	MyOS.Clear()
 	print('Getting ready to Reconfigure your IP')
 	time.sleep(DELAY)
-	ip_config()
+	ip_config() # TODO see what this is? missing intelisense
 	print('Your IP is now Configured')
 	time.sleep(DELAY)
 	main()			
@@ -180,32 +180,21 @@ def IP():
 ##############
 # Debug function
 def Debug(var1, var2, TF):
-	DEBUG = True
-	if DEBUG == True and TF == True:
+	DEBUG = True # TODO O_e >..< just omg DEBUG == True will RETURN TRUE DIRECTLY AFTER ASSIGNMENT O_e >..< bleh
+	if DEBUG == True and TF == True: #
 		print(var1 +' = ' + var2)	
 			
 # Print in color then reset color on end of line.
+# TODO O_e can we please move this to the com class?
 def colorPrint(txt,colorStart):
 	print (colorStart+txt+'\033[0m')
 
-# Initial function	
-def init():
-	# Checks to see what O/S yor running and set the variable
-	# Checks to see if to use username or real name
-	global users
-	if user == '':
-		users = uname
-	else:
-		users = user
-	# Switch over to the main function
-	main()	
-	# Checks to see if python 3 is installed. If not, install it
 
 # Main Entry Point
 def main():
     """Main Entry point"""
     MyOS.Clear()
-    print('Welcome',users,'to the Collective Industries Tools.')
+    print('Welcome',users,'to the Collective Industries Tools.') # TODO see where that users goes and why its not in the com class
     print('')
     print('Installations')
     ProgramMenu.Print()
@@ -220,35 +209,40 @@ def main():
             MyOS.Clear()
             print("Running GitHub install/uninstall")
             time.sleep(DELAY)
-            git()
+            git() # Make a task class to call values from a dict 
             break
         if case("2"):
             MyOS.Clear()
             print("Running GCC install/uninstall")
             time.sleep(DELAY)
-            gcc()
+            gcc() #
             break
         if case("3"):
             MyOS.Clear()
             print("Running CIFS Filesystem install/uninstall")
             time.sleep(DELAY)
-            cifs()
+            cifs() #
             break
         if case("4"):
             MyOS.Clear()
             print("Running SSH Server install/uninstall")
             time.sleep(DELAY)
-            ssh()
+            ssh() #
             break
         if case("8"):
             MyOS.Clear()
             print("Running IP Configuration")
             time.sleep(DELAY)
-            IP()
+            IP() #
             break
 
-##################
-## Main Program ##
-##################
-# Start the main function and start the program
-init()
+# Pythons built in main entrypoint
+# calls init and runs main loop
+if __name__ == "__main__":
+    # WTF? I cant even
+    if user == '':
+        users = uname
+    else:
+        users = user
+	# Switch over to the main function
+    main()	

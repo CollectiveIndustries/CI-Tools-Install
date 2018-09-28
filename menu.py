@@ -1,6 +1,13 @@
+######################################
+##									##
+##		Collective Industries		##
+##		 	Menu Objects			##
+##									##
+##		  By: Levi & Andrew			##
+##				©2018				##
+######################################
 from lib import com
 from prettytable import PrettyTable
-
 
 class TextMenu(object):
     """Defines a Text Menu Object"""

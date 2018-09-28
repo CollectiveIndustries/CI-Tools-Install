@@ -18,6 +18,7 @@
 #############
 from lib import com
 import re
+
 ###############
 ## Variables ##
 ###############
@@ -27,7 +28,7 @@ oper = MyOS._type_
 #################
 ## Main Script ##
 #################
-def word_search(file, word, rword):
+def word_search(file, _oldWord, _newWord):
     _file1_ = open(file, 'r')
     _file2_ = open(file, 'w')
     #count = 0
@@ -36,7 +37,7 @@ def word_search(file, word, rword):
     #    if re.match('(.*)'+word+'(.*)', line):
             #print (line,)
     for line in _file1_:
-        _file1_.write(line.replace(word, rword))
+        _file1_.write(line.replace(_oldWord, _newWord))
         _file1_.close()
         
 def git_install():

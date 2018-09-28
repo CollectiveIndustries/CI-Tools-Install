@@ -9,7 +9,6 @@
 ##				©2018				##
 ######################################
 
-
 #############
 ## Imports ##
 #############
@@ -114,13 +113,11 @@ def cifs():
 		print('CIFS Filesystem is now installed')
 		time.sleep(DELAY)
 		main()
-	else:
-		# CIFS Uninstaller
-		if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["3"][1])):
-			os.system('sudo apt-get --purge remove -y cifs-utils') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
-			main()
-		else:
-			main()
+	elif ProgramMenu.Confirm("Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.".format(ProgramMenu_Items["3"][1])):
+        os.system('sudo apt-get --purge remove -y cifs-utils') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
+        main()
+    else:
+        main()
 
 # SSH Server Install/Uninstall
 def ssh():

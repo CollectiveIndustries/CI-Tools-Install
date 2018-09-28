@@ -22,7 +22,8 @@ class TextMenu(object):
         self._menu_.align[header] = alignment
 
     def Confirm(self, prompt="", option=""):
-        """Confirm dialog"""
+        """Confirm dialog
+        :option: can be left blank depending on :prompt:"""
         confirm = "{}{}{} {} Are you sure (y/n)?"
         answer = input(confirm.format(com.color.WARNING, prompt, com.color.END, option)).lower()
         if answer == "y":

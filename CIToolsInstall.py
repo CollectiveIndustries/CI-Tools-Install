@@ -66,16 +66,12 @@ OptionsMenu.Align(OptionsMenu_Header[1],"l")
 #########################################
 # GitHub Instal/Uninstall Function
 def git():
-	"""GitHub Installation"""
+	"""GitHub Installation handle"""
 	MyOS.Clear()
 	if ProgramMenu_Items["1"][2] == 'Installed':
 		# GitHub Uninstaller
 
-        # TODO Confrim uninstall
-		print('Are you sure you want to remove GitHub from your machine.')
-		print ('You can always Reinstall it later.')
-		yn = input('Y/N: ')
-		if yn.lower() == 'y':
+		if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["1"][1])):
 			os.system('sudo apt-get --purge remove -y git') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
 		else:
 			main()
@@ -93,12 +89,7 @@ def gcc():
 	MyOS.Clear()
 	if ProgramMenu_Items["2"][2] == 'Installed': 
 		# GCC Uninstaller
-
-        # TODO Wait another confirm box?
-		print('Are you sure you want to remove GCC from your machine.')
-		print ('You can always Reinstall it later.')
-		yn = input('Y/N: ')
-		if yn.lower() == 'y':
+		if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["2"][1])):
 			os.system('sudo apt-get --purge remove -y build-essential') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
 		else:
 			main()
@@ -125,12 +116,7 @@ def cifs():
 		main()
 	else:
 		# CIFS Uninstaller
-
-        # TODO Holy cow guess what? yup another confirm
-		print ('Are you sure you want to remove CIFS Filesytem from your machine.')
-		print ('You can always Reinstall it later.')
-		yn = input('Y/N: ')
-		if yn.lower() == 'y':
+		if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["3"][1])):
 			os.system('sudo apt-get --purge remove -y cifs-utils') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
 			main()
 		else:
@@ -151,12 +137,7 @@ def ssh():
 		main()
 	else:
 		# SSH Uninstaller
-
-        # TODO YES!! I'm sure remove the damn thing
-		print ('Are you sure you want to remove SSH Server from your machine.')
-		print ('You can always Reinstall it later.')
-		yn = input('Y/N: ')
-		if yn.lower() == 'y':
+		if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["4"][1])):
 			os.system('sudo apt-get --purge remove -y openssh-server') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
 			main()
 		else:

@@ -26,6 +26,15 @@ import re, menu
 MyOS = com._OS_()
 MyOSType = MyOS._type_
 
+# um O_e
+def _IsInstalled(_progname):
+    """Checks to see if a program is installed or not"""
+    status = subprocess.getstatusoutput("dpkg-query -W -f='${Status}' " + _progname) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
+    if not status[0]:
+        return True
+    else:
+        return False
+
 # Install Object
 # Atributes
 #   _progname_ = ""
@@ -36,11 +45,22 @@ MyOSType = MyOS._type_
 #   run(start_params)
 #
 
-def Upgrade(_usrpass=""):
-    """Run Environmental upgrade"""
-    call("sudo aptitude -y update", shell=False) # TODO good lord replace sudo
-    call("sudo aptitude -y upgrade", shell=False)# TODO good lord replace sudo
+def RunSubProc(*args):
+        """Run Subprocess and catch exeptions"""
+        try:
+            retcode = call(args, shell=False)
+            if retcode < 0:
+                print("Child was terminated by signal", -retcode, file=sys.stderr)
+            else:
+                print("Child returned", retcode, file=sys.stderr)
+        except OSError as e:
+            print("Execution failed:", e, file=sys.stderr)
 
+def Upgrade(sudopass=""):
+    """Run Environmental upgrade"""
+    RunSubProc("echo {} | sudo -S  aptitude -y update".format(sudopass))
+    RunSubProc("echo {} | sudo -S  aptitude -y upgrade".format(sudopass))
+    
 class Program(object):
     """Defines a program that can be manipulated"""
     def __init__(self, name="", srvcname="",sudopass=""):
@@ -53,60 +73,41 @@ class Program(object):
             self._progname_ = name
             self._servicename_ = srvcname
             self.INSTALLED = self._IsInstalled()
-            self._sudo_ = "echo {} | sudo -S {}".format(sudopass)
-
-    def _IsInstalled(self):
-        """Checks to see if a program is installed or not"""
-        status = subprocess.getstatusoutput("dpkg-query -W -f='${Status}' " + self._progname_) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
-        if not status[0]:
-            return True
-        else:
-            return False
-
-    def _RunSubProc(self,*args):
-        """Run Subprocess and catch exeptions"""
-        try:
-            retcode = call(args, shell=False) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
-            if retcode < 0:
-                print("Child was terminated by signal", -retcode, file=sys.stderr)
-            else:
-                print("Child returned", retcode, file=sys.stderr)
-        except OSError as e:
-            print("Execution failed:", e, file=sys.stderr)
+            self._sudo_ = "echo {} | sudo -S".format(sudopass)
 
     def Install(self):
         """"Install package on system"""
-        self._RunSubProc('{} aptitude --purge remove -y '+ self._progname_)
+        RunSubProc('{} aptitude --purge remove -y '+ self._progname_)
 
     def _serviceUp(self):
         """Start service"""
         _ctlStartCMD_ = "{} systemctl start {}.service".format(self._sudo_,self._servicename_)
         _ctlEnableCMD_ = '{} systemctl enable {}.service'.format(self._sudo_,self._servicename_)
-        self._RunSubProc(_ctlStartCMD_)
-        self._RunSubProc(_ctlEnableCMD_)
+        RunSubProc(_ctlStartCMD_)
+        RunSubProc(_ctlEnableCMD_)
 
     def _serviceDown(self):
         """Start service"""
         _ctlStopCMD_ = "{} systemctl stop {}.service".format(self._sudo_,self._servicename_)
-        self._RunSubProc(_ctlStopCMD_)
+        RunSubProc(_ctlStopCMD_)
 
     def _serviceRestart(self):
         """Start service"""
         _ctlRestartCMD_ = "{} systemctl retart {}.service".format(self._sudo_,self._servicename_)
-        self._RunSubProc(_ctlRestartCMD_)
+        RunSubProc(_ctlRestartCMD_)
         return
 
     def Purge(self):
         """"Purge package from system"""
         if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(self._progname_)):
-            subprocess.call('echo {} | sudo -S aptitude --purge remove -y '+ self._progname_) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/ Use _RunSubProc(self, ARGS) # TODO good lord replace sudo
+            RunSubProc('{} aptitude --purge remove -y {}'.format(self._sudo_,self._progname_)
             self.INSTALLED = False
 
     def _gitConfig_():
         gname = input('What name would you like to use?: ')
-        subprocess.call('git config --global user.name "',gname,'"') # TODO Use _RunSubProc(self, ARGS)
+        RunSubProc('git config --global user.name "{}"'.format(name)) # TODO what is this for?
 
-        call("echo {} | sudo -S aptitude -y "+ program, shell=False) # TODO not exactly sure what were doing here? # TODO good lord replace sudo
+####################################################  END CLASS ####################################################
 
 def ip_config():
     # TODO Refactor with menu class setup refuse empty and defualts

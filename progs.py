@@ -100,7 +100,7 @@ class Program(object):
     def Purge(self):
         """"Purge package from system"""
         if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(self._progname_)):
-            RunSubProc('{} aptitude --purge remove -y {}'.format(self._sudo_,self._progname_)
+            RunSubProc('{} aptitude --purge remove -y {}'.format(self._sudo_,self._progname_))
             self.INSTALLED = False
 
     def _gitConfig_():

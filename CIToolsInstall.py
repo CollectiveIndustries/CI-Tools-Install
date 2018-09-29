@@ -31,15 +31,6 @@ if MyOS._type_ != "win32":
 os_name	= os.name
 DELAY = 2
 
-
-# User Object
-class MyUser(object):
-    """Defines a User Object"""
-    def __init__(self,uname=getpass.getuser(),pswd=getpass.getpass("Login Password: ")):
-        """just initilize values"""
-        self.UserName = uname.replace(',', '')
-        self.PassWord = pswd
-
 ##################
 ## Menu Builder ##
 ##################
@@ -180,6 +171,7 @@ def main():
     
     print('Welcome',getpass.getuser(),'to the Collective Industries Tools. \nPlease login to continue.') # TODO see where that users goes and why its not in the com class
     print('')
+    usr = MyUser.GetPasswrd()
     print('Installations')
     ProgramMenu.Print()
     OptionsMenu.Print()
@@ -223,10 +215,5 @@ def main():
 # Pythons built in main entrypoint
 # calls init and runs main loop
 if __name__ == "__main__":
-    # WTF? I cant even
-    if user == '':
-        users = uname
-    else:
-        users = user
 	# Switch over to the main function
     main()

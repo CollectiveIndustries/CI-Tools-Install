@@ -19,6 +19,9 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="users.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="progs.py" />
     <Compile Include="CIToolsInstall.py" />
     <Compile Include="lib\com.py" />

@@ -13,12 +13,13 @@
 ## Imports ##
 #############
 from lib import com
+import users
 import shutil, os, subprocess, getpass, time, menu, progs
 
-# Build an OS Object
+# Build Objecs
 MyOS = com._OS_()
+usr = users.MyUser()
 
-user = ""
 ## Unix Only Imports
 if MyOS._type_ != "win32":
     import pwd # no module found, UNIX systems ONLY
@@ -169,9 +170,9 @@ def main():
     MyOS.Clear()
     # grab user once
     
-    print('Welcome',getpass.getuser(),'to the Collective Industries Tools. \nPlease login to continue.') # TODO see where that users goes and why its not in the com class
+    print('Welcome to the Collective Industries Tools.') # TODO see where that users goes and why its not in the com class
     print('')
-    usr = MyUser.GetPasswrd()
+    usr.Login()
     print('Installations')
     ProgramMenu.Print()
     OptionsMenu.Print()

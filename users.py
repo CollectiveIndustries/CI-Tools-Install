@@ -5,7 +5,8 @@ class MyUser():
         self.UserName = ""
         self.PassWord = ""
 
-    def GetPasswrd(self):
+    def Login(self):
         """just initilize values"""
         self.UserName = getpass.getuser().replace(',', '')
+        print("Please login to continue.\nUsername=".format(self.UserName))
         self.PassWord = getpass.getpass("Login Password: ")

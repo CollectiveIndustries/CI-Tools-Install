@@ -114,7 +114,7 @@ def cifs():
 		time.sleep(DELAY)
 		main()
 	elif ProgramMenu.Confirm("Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.".format(ProgramMenu_Items["3"][1])):
-        os.system('sudo apt-get --purge remove -y cifs-utils') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
+        os.system('sudo apt-get --purge remove -y cifs-utils') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O
         main()
     else:
         main()
@@ -123,9 +123,9 @@ def cifs():
 def ssh():
 	# SSH Installation
 	MyOS.Clear()
-	Debug('SSH Program Check', ProgramMenu_Items["4"][2], False) 
+	Debug('SSH Program Check', ProgramMenu_Items["4"][2], False)
 	time.sleep(DELAY)
-	if ProgramMenu_Items["4"][2] == False: 
+	if ProgramMenu_Items["4"][2] == False:
 		print('Getting ready to install SSH Server.')
 		time.sleep(DELAY)
 		ssh_install()
@@ -151,7 +151,7 @@ def IP():
 	ip_config() # TODO see what this is? missing intelisense
 	print('Your IP is now Configured')
 	time.sleep(DELAY)
-	main()			
+	main()
 
 ##############
 ##Functions ##
@@ -160,7 +160,7 @@ def IP():
 def Debug(var1, var2, TF):
 	DEBUG = True # TODO O_e >..< just omg DEBUG == True will RETURN TRUE DIRECTLY AFTER ASSIGNMENT O_e >..< bleh
 	if DEBUG == True and TF == True: #
-		print(var1 +' = ' + var2)	
+		print(var1 +' = ' + var2)
 			
 # Print in color then reset color on end of line.
 # TODO O_e can we please move this to the com class?
@@ -187,7 +187,7 @@ def main():
             MyOS.Clear()
             print("Running GitHub install/uninstall")
             time.sleep(DELAY)
-            git() # TODO Make a task class to call values from a dict 
+            git() # TODO Make a task class to call values from a dict
             break
         if case("2"):
             MyOS.Clear()
@@ -223,4 +223,4 @@ if __name__ == "__main__":
     else:
         users = user
 	# Switch over to the main function
-    main()	
+	main()

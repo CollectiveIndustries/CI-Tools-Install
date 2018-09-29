@@ -17,7 +17,7 @@
 ## Imports ##
 #############
 from lib import com
-from subprocess import call
+import subprocess
 import re, menu
 
 ###############
@@ -33,8 +33,62 @@ MyOSType = MyOS._type_
 #   _IsInstalled(self)
 #   _DoInstall(self)
 #   _Uninstall(self)
-#   Go(start_params)
+#   run(start_params)
 #
+
+
+class Program(object):
+    """Defines a program that can be manipulated"""
+    def __init__(self, name="", sername=""):
+        if MyOSType == "win32":
+            print("Sorry Windows is not supported at this time :( we are working on it we promise.")
+            exit(1) # exit return failure to shell
+        else:
+            # set variables and init stuff
+            self._progname_ = name
+            self._servicename_ = sername
+            self.INSTALLED = self._IsInstalled()
+
+    def _IsInstalled(self):
+        """Checks to see if a program is installed or not"""
+        status = subprocess.getstatusoutput("dpkg-query -W -f='${Status}' " + self._progname_) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
+        if not status[0]:
+            return True
+        else:
+            return False
+
+    def _RunSubProc(self,*args):
+        """Run Subprocess and catch exeptions"""
+        try:
+            retcode = call(self._progname_ + args, shell=False) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
+            if retcode < 0:
+                print("Child was terminated by signal", -retcode, file=sys.stderr)
+            else:
+                print("Child returned", retcode, file=sys.stderr)
+        except OSError as e:
+            print("Execution failed:", e, file=sys.stderr)
+
+    def Install(self):
+        """"Install package on system"""
+        subprocess.call('sudo aptitude --purge remove -y '+ self._progname_) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/ Use _RunSubProc(self, ARGS)
+
+    def _serviceUp(self):
+        """Start service"""
+        subprocess.call('sudo systemctl start ssh.service') # TODO Use _RunSubProc(self, ARGS)
+        subprocess.call('sudo systemctl enable ssh.service')# TODO Use _RunSubProc(self, ARGS)
+
+    def _serviceDown(self):
+        """Start service"""
+        return
+    def _serviceRestart(self):
+        """Start service"""
+        return
+
+    def Purge(self):
+        """"Purge package from system"""
+        if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(self._progname_)):
+            subprocess.call('sudo aptitude --purge remove -y '+ self._progname_) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
+            self.INSTALLED = False
 
 class installer():
     def _git_():
@@ -43,7 +97,7 @@ class installer():
             _dinstall_('git')
             call('git config --global user.name "',gname,'"')
         else:
-            print("Sorry Windows is not supported at this time :( we are working on it we promise.") # TODO 4 little
+            print() # TODO 4 little
 
     def _gcc_():
         if(MyOSType == 'debian'):
@@ -53,13 +107,13 @@ class installer():
 
     def _cifs_():
         if(MyOSType == 'debian'):
-            _dinstall_('cifs-utils')
+            
         else:
             print("Sorry Windows is not supported at this time :( we are working on it we promise.") # TODO 2 little
 
     def _ssh_():
         if(MyOSType == 'debian'):
-            _dinstall_('openssh-server')
+            
             call('sudo systemctl start ssh.service') # TODO build a service handler (we want more then one service to be stop/start/restart
             call('sudo systemctl enable ssh.service')
         else:
@@ -67,35 +121,32 @@ class installer():
 
     def _mysql_():
         if(MyOSType == 'debian'):
-            _dinstall('mysql-server')
+            
         else:
             print("Sorry Windows is not supported at this time :( we are working on it we promise.")# TODO 5 little >..<
     
     def _mdb_():
         if(MyOSType == 'debian'):
-            _dinstall_('mariadb-server')
+            
         else:
             print("Sorry Windows is not supported at this time :( we are working on it we promise.") # TODO O_e 6? little
     
     def apache_install():
         if(MyOSType == 'debian'):
-            _dinstall_('apache2')
+            
         else:
             print("Sorry Windows is not supported at this time :( we are working on it we promise.") # TODO OMG 7 LITTLE
 
     def d2u_install():
         if(MyOSType == 'debian'):
-            _dinstaller('dos2unix')
+            
         else:
             print("Sorry Windows is not supported at this time :( we are working on it we promise.") # ~_~ why do i even? 8 little
 
 def _dinstall_(program): # Installaion for Debian
-    call ("sudo aptitude -y update")
-    call ("sudo aptitude -y upgrade")
-    call ("sudo aptitude -y "+ program)
-
-def uninstall(_prog_):
-    call('sudo aptitude --purge remove -y '+ _prog_)
+    call("sudo aptitude -y update", shell=False)
+    call("sudo aptitude -y upgrade", shell=False)
+    call("sudo aptitude -y "+ program, shell=False) # TODO not exactly sure what were doing here?
 
 def install_check(prog, num):
     if ProgramMenu_Items[num][2] == 'Installed':
@@ -140,7 +191,7 @@ def ip_config():
     else:
             print("Sorry Windows is not supported at this time :( we are working on it we promise.") # TODO OH COME ON!!!!!
 
-def word_search(file, _oldWord, _newWord):
+def word_search(file, _oldWord, _newWord): # TODO maybe a regex? idk what we're doing here
     _file1_ = open(file, 'r')
     _file2_ = open(file, 'w')
     #count = 0

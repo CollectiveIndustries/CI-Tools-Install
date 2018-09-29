@@ -90,58 +90,11 @@ class Program(object):
             subprocess.call('sudo aptitude --purge remove -y '+ self._progname_) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
             self.INSTALLED = False
 
-class installer():
-    def _git_():
+    def _gitConfig_():
         gname = input('What name would you like to use?: ')
         if(MyOSType == 'debian'):
-            _dinstall_('git')
             call('git config --global user.name "',gname,'"')
         else:
-            print() # TODO 4 little
-
-    def _gcc_():
-        if(MyOSType == 'debian'):
-            _dinstall_('build-essential')
-        else:
-            print("Sorry Windows is not supported at this time :( we are working on it we promise.") # TODO 3 little
-
-    def _cifs_():
-        if(MyOSType == 'debian'):
-            
-        else:
-            print("Sorry Windows is not supported at this time :( we are working on it we promise.") # TODO 2 little
-
-    def _ssh_():
-        if(MyOSType == 'debian'):
-            
-            call('sudo systemctl start ssh.service') # TODO build a service handler (we want more then one service to be stop/start/restart
-            call('sudo systemctl enable ssh.service')
-        else:
-            print("Sorry Windows is not supported at this time :( we are working on it we promise.") # TODO 1 little
-
-    def _mysql_():
-        if(MyOSType == 'debian'):
-            
-        else:
-            print("Sorry Windows is not supported at this time :( we are working on it we promise.")# TODO 5 little >..<
-    
-    def _mdb_():
-        if(MyOSType == 'debian'):
-            
-        else:
-            print("Sorry Windows is not supported at this time :( we are working on it we promise.") # TODO O_e 6? little
-    
-    def apache_install():
-        if(MyOSType == 'debian'):
-            
-        else:
-            print("Sorry Windows is not supported at this time :( we are working on it we promise.") # TODO OMG 7 LITTLE
-
-    def d2u_install():
-        if(MyOSType == 'debian'):
-            
-        else:
-            print("Sorry Windows is not supported at this time :( we are working on it we promise.") # ~_~ why do i even? 8 little
 
 def _dinstall_(program): # Installaion for Debian
     call("sudo aptitude -y update", shell=False)

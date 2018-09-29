@@ -47,7 +47,7 @@ def _IsInstalled(_progname):
 #   run(start_params)
 #
 
-def RunSubProc(*args): # TODO Exception: [Errno 2] No such file or directory Might Need PIPE handling for sudo and echo
+def RunSubProc(*args): # TODO Exception: [Errno 2] No such file or directory Might Need PIPE handling for sudo and echo https://docs.python.org/2/library/subprocess.html#popen-objects
         """Run Subprocess and catch exeptions"""
         try:
             retcode = subprocess.call(args, shell=False)

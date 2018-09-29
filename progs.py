@@ -18,7 +18,8 @@
 #############
 from lib import com
 from subprocess import Popen, PIPE
-import users, shlex, sys, subprocess, re, menu
+from menu import TextMenu
+import users, shlex, sys, subprocess, re
 
 ###############
 ## Variables ##
@@ -29,9 +30,16 @@ usr = users.MyUser()
 
 def _IsInstalled(_progname):
     """Checks to see if a program is installed or not"""
-    status = subprocess.call("aptitude search {}".format(self.ProgName)
+    args = "aptitude search {}".format(_progname)
+    aptsearch = Popen(shlex.split(args), stdout=PIPE)
+    output = aptsearch.communicate()[0]
+    for line in output:
+        if output[0] == 'i' and output[1] == _progname:
+            return 'Installed'
+        else:
+            return 'Not Installed'
+    # do something with output
     #status = subprocess.getstatusoutput("dpkg-query -W -f='${Status}' " + _progname) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
-
     #if not status[0]:
     #    return True
     #else:
@@ -124,7 +132,7 @@ class Program(object):
 
     def Purge(self):
         """"Purge package from system"""
-        if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always reinstall it later.'.format(self.ProgName)):
+        if TextMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always reinstall it later.'.format(self.ProgName)):
             RunSubProc('{} aptitude --purge remove -y {}'.format(self._sudo_,self.ProgName))
             self.INSTALLED = False
 

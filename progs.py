@@ -101,18 +101,6 @@ def _dinstall_(program): # Installaion for Debian
     call("sudo aptitude -y upgrade", shell=False)
     call("sudo aptitude -y "+ program, shell=False) # TODO not exactly sure what were doing here?
 
-def install_check(prog, num):
-    if ProgramMenu_Items[num][2] == 'Installed':
-        if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["1"][1])):
-            uninstall(prog)
-        else:
-            main()
-    else:
-        time.sleep(DELAY)
-        installer._$prog_
-        print('Installation Successful')
-        main()
-
 def ip_config():
     # TODO Refactor with menu class setup refuse empty and defualts
     if(MyOSType == 'debian'):

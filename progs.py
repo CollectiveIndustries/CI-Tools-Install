@@ -36,6 +36,10 @@ MyOSType = MyOS._type_
 #   run(start_params)
 #
 
+def Upgrade(_usrpass=""):
+    """Run Environmental upgrade"""
+    call("sudo aptitude -y update", shell=False) # TODO good lord replace sudo
+    call("sudo aptitude -y upgrade", shell=False)# TODO good lord replace sudo
 
 class Program(object):
     """Defines a program that can be manipulated"""
@@ -71,11 +75,11 @@ class Program(object):
     def Install(self):
         """"Install package on system"""
         subprocess.call('sudo aptitude --purge remove -y '+ self._progname_) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/ Use _RunSubProc(self, ARGS)
-
+    
     def _serviceUp(self):
         """Start service"""
-        subprocess.call('sudo systemctl start ssh.service') # TODO Use _RunSubProc(self, ARGS)
-        subprocess.call('sudo systemctl enable ssh.service')# TODO Use _RunSubProc(self, ARGS)
+        subprocess.call('sudo systemctl start ssh.service') # TODO Use _RunSubProc(self, ARGS) # TODO good lord replace sudo
+        subprocess.call('sudo systemctl enable ssh.service')# TODO Use _RunSubProc(self, ARGS) # TODO good lord replace sudo
 
     def _serviceDown(self):
         """Start service"""
@@ -87,19 +91,14 @@ class Program(object):
     def Purge(self):
         """"Purge package from system"""
         if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(self._progname_)):
-            subprocess.call('sudo aptitude --purge remove -y '+ self._progname_) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
+            subprocess.call('sudo aptitude --purge remove -y '+ self._progname_) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/ Use _RunSubProc(self, ARGS) # TODO good lord replace sudo
             self.INSTALLED = False
 
     def _gitConfig_():
         gname = input('What name would you like to use?: ')
-        if(MyOSType == 'debian'):
-            call('git config --global user.name "',gname,'"')
-        else:
+        subprocess.call('git config --global user.name "',gname,'"') # TODO Use _RunSubProc(self, ARGS)
 
-def _dinstall_(program): # Installaion for Debian
-    call("sudo aptitude -y update", shell=False)
-    call("sudo aptitude -y upgrade", shell=False)
-    call("sudo aptitude -y "+ program, shell=False) # TODO not exactly sure what were doing here?
+        call("sudo aptitude -y "+ program, shell=False) # TODO not exactly sure what were doing here? # TODO good lord replace sudo
 
 def ip_config():
     # TODO Refactor with menu class setup refuse empty and defualts

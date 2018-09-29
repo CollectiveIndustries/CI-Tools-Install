@@ -68,6 +68,11 @@ class Program(object):
         if MyOSType == "win32":
             print("Sorry Windows is not supported at this time :( we are working on it we promise.")
             #exit(1) # exit return failure to shell
+            self.ProgName = name
+            self._servicename_ = srvcname
+            self.INSTALLED = _IsInstalled(self.ProgName)
+            self.installedStr = self._frmtStr()
+            self._sudo_ = "echo {} | sudo -S".format(sudopass)
         else:
             # set variables and init stuff
             self.ProgName = name
@@ -75,6 +80,10 @@ class Program(object):
             self.INSTALLED = _IsInstalled(self.ProgName)
             self.installedStr = self._frmtStr()
             self._sudo_ = "echo {} | sudo -S".format(sudopass)
+
+    def UserEntryPoint(self):
+        """not sure what goes here yet"""
+        print("{} object {} {}".format(self.ProgName,"Said","Hello"))
 
     def _frmtStr(self):
         """Return a print ready true/false green/red"""

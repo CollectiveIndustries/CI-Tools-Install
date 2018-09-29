@@ -48,17 +48,14 @@ ProgramLST = [Program('git'),
               Program('apache2'),
               Program('dos2unix')]
 
-#for prog in ProgramLST:
-#    ProgramMenu_Items  =
-
-ProgramMenu_Items  = {"1":["GitHub",ProgramLST[0].installedStr],
-                      "2":["GCC",ProgramLST[1].installedStr],
-                      "3":["CIFS Filesystem",ProgramLST[2].installedStr],
-                      "4":["SSH Server",ProgramLST[3].installedStr],
-                      "5":["MySQL Server",ProgramLST[4].installedStr],
-                      "6":["MariaDB Server",ProgramLST[5].installedStr],
-                      "7":["Apache",ProgramLST[6].installedStr],
-                      "8":["Dos 2 Unix converter",ProgramLST[7].installedStr]}
+ProgramMenu_Items  = {1:["GitHub",ProgramLST[0].installedStr],
+                      2:["GCC",ProgramLST[1].installedStr],
+                      3:["CIFS Filesystem",ProgramLST[2].installedStr],
+                      4:["SSH Server",ProgramLST[3].installedStr],
+                      5:["MySQL Server",ProgramLST[4].installedStr],
+                      6:["MariaDB Server",ProgramLST[5].installedStr],
+                      7:["Apache",ProgramLST[6].installedStr],
+                      8:["Dos 2 Unix converter",ProgramLST[7].installedStr]}
 
 OptionsMenu_Header = ["#", "Settings"]
 OptionsMenu_Items  = {"9":["IP Config"],
@@ -72,6 +69,16 @@ ProgramMenu.Align(ProgramMenu_Header[2],"r")
 
 OptionsMenu = menu.TextMenu(OptionsMenu_Items,OptionsMenu_Header)
 OptionsMenu.Align(OptionsMenu_Header[1],"l")
+
+####################
+## Program Driver ##
+####################
+
+def CallProg(proglist=[],usrChoice=1):
+    """Compares the prog list with the menu dict and calls the setup()"""
+    indx = usrChoice-1
+    print("Prog: {}\nIndex: {}\n###\n".format(proglist[indx].ProgName,indx))
+    proglist[indx].UserEntryPoint()
 
 #########################################
 ## Program Install/Uninstall Functions ##
@@ -193,47 +200,16 @@ def main():
     OptionsMenu.Print()
     print("")
 
-    for case in com.switch(input('Select: ').lower()):
+    option = input('Select: ').lower()
+
+    # if its a program option run it
+    if int(option) <= len(ProgramLST): CallProg(ProgramLST,int(option))
+
+    for case in com.switch(option): # define only non program menu options I.E Letters
         if case("e"):
             exit(0)
             break
-        if case("1"): pass
-        if case("2"): pass
-        if case("3"): pass
-        if case("4"): pass
-        if case("5"): pass
-        if case("6"): pass
-        if case("7"): pass
-        if case("8"):
-            MyOS.Clear()
-            print("Running {} install/uninstall".format())
-            time.sleep(DELAY)
-            git() # TODO Make a task class to call values from a dict
-            break
-        if case("2"):
-            MyOS.Clear()
-            print("Running GCC install/uninstall")
-            time.sleep(DELAY)
-            gcc() #
-            break
-        if case("3"):
-            MyOS.Clear()
-            print("Running CIFS Filesystem install/uninstall")
-            time.sleep(DELAY)
-            cifs() #
-            break
-        if case("4"):
-            MyOS.Clear()
-            print("Running SSH Server install/uninstall")
-            time.sleep(DELAY)
-            ssh() #
-            break
-        if case("8"):
-            MyOS.Clear()
-            print("Running IP Configuration")
-            time.sleep(DELAY)
-            IP() #
-            break
+
 
 # Pythons built in main entrypoint
 # calls init and runs main loop

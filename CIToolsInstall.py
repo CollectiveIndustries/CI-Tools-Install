@@ -28,11 +28,17 @@ if MyOS._type_ != "win32":
 ###############
 ## Variables ##
 ###############
-global users
-uname = getpass.getuser()
 os_name	= os.name
-user = user.replace(',', '')
 DELAY = 2
+
+
+# User Object
+class MyUser(object):
+    """Defines a User Object"""
+    def __init__(self,uname=getpass.getuser(),pswd=getpass.getpass("Login Password: ")):
+        """just initilize values"""
+        self.UserName = uname.replace(',', '')
+        self.PassWord = pswd
 
 ##################
 ## Menu Builder ##
@@ -170,7 +176,9 @@ def colorPrint(txt,colorStart):
 def main():
     """Main Entry point"""
     MyOS.Clear()
-    print('Welcome',users,'to the Collective Industries Tools.') # TODO see where that users goes and why its not in the com class
+    # grab user once
+    
+    print('Welcome',getpass.getuser(),'to the Collective Industries Tools. \nPlease login to continue.') # TODO see where that users goes and why its not in the com class
     print('')
     print('Installations')
     ProgramMenu.Print()

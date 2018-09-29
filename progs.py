@@ -17,8 +17,10 @@
 ## Imports ##
 #############
 from lib import com
+import sys
 import subprocess
 import re, menu
+
 
 ###############
 ## Variables ##
@@ -45,10 +47,10 @@ def _IsInstalled(_progname):
 #   run(start_params)
 #
 
-def RunSubProc(*args):
+def RunSubProc(*args): # TODO Exception: [Errno 2] No such file or directory:
         """Run Subprocess and catch exeptions"""
         try:
-            retcode = call(args, shell=False)
+            retcode = subprocess.call(args, shell=False)
             if retcode < 0:
                 print("Child was terminated by signal", -retcode, file=sys.stderr)
             else:
@@ -67,7 +69,7 @@ class Program(object):
         """"Initilize object"""
         if MyOSType == "win32":
             print("Sorry Windows is not supported at this time :( we are working on it we promise.")
-            #exit(1) # exit return failure to shell
+            #exit(1) # exit return failure to shell Following options are for DEBUG in win32 ONLY
             self.ProgName = name
             self._servicename_ = srvcname
             self.INSTALLED = _IsInstalled(self.ProgName)

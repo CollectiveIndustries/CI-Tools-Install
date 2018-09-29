@@ -67,17 +67,26 @@ class Program(object):
         """"Initilize object"""
         if MyOSType == "win32":
             print("Sorry Windows is not supported at this time :( we are working on it we promise.")
-            exit(1) # exit return failure to shell
+            #exit(1) # exit return failure to shell
         else:
             # set variables and init stuff
-            self._progname_ = name
+            self.ProgName = name
             self._servicename_ = srvcname
-            self.INSTALLED = self._IsInstalled()
+            self.INSTALLED = _IsInstalled(self.ProgName)
+            self.installedStr = self._frmtStr()
             self._sudo_ = "echo {} | sudo -S".format(sudopass)
+
+    def _frmtStr(self):
+        """Return a print ready true/false green/red"""
+        _strEnd_ = "{}{}".format(self.INSTALLED,com.color.END)
+        if self.INSTALLED:
+            return "{}{}".format(com.color.OKGREEN,_strEnd_)
+        else:
+            return "{}{}".format(com.color.FAIL,_strEnd_)
 
     def Install(self):
         """"Install package on system"""
-        RunSubProc('{} aptitude --purge remove -y '+ self._progname_)
+        RunSubProc('{} aptitude --purge remove -y '+ self.ProgName)
 
     def _serviceUp(self):
         """Start service"""
@@ -99,8 +108,8 @@ class Program(object):
 
     def Purge(self):
         """"Purge package from system"""
-        if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(self._progname_)):
-            RunSubProc('{} aptitude --purge remove -y {}'.format(self._sudo_,self._progname_))
+        if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always reinstall it later.'.format(self.ProgName)):
+            RunSubProc('{} aptitude --purge remove -y {}'.format(self._sudo_,self.ProgName))
             self.INSTALLED = False
 
     def _gitConfig_():

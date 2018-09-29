@@ -13,6 +13,7 @@
 ## Imports ##
 #############
 from lib import com
+from progs import Program
 import users
 import shutil, os, subprocess, getpass, time, menu, progs
 
@@ -36,14 +37,28 @@ DELAY = 2
 ## Menu Builder ##
 ##################
 ProgramMenu_Header = ["#","Program","Installed"]
-ProgramMenu_Items  = {"1":["GitHub", MyOS.ProgExists('git')],
-                      "2":["GCC",MyOS.ProgExists('build-essential')],
-                      "3":["CIFS Filesystem",MyOS.ProgExists('cifs-utils')],
-                      "4":["SSH Server",MyOS.ProgExists('openssh-server')],
-                      "5":["MySQL Server",MyOS.ProgExists('mysql-server')],
-                      "6":["MariaDB Server",MyOS.ProgExists('mariadb-server')],
-                      "7":["Apache",MyOS.ProgExists('apache2')],
-                      "8":["Dos 2 Unix converter",MyOS.ProgExists('dos2unix')]}
+
+# Menu options on back end
+ProgramLST = [Program('git'),
+              Program('build-essential'),
+              Program('cifs-utils'),
+              Program('openssh-server'),
+              Program('mysql-server'),
+              Program('mariadb-server'),
+              Program('apache2'),
+              Program('dos2unix')]
+
+#for prog in ProgramLST:
+#    ProgramMenu_Items  =
+
+ProgramMenu_Items  = {"1":["GitHub",ProgramLST[0].installedStr],
+                      "2":["GCC",ProgramLST[1].installedStr],
+                      "3":["CIFS Filesystem",ProgramLST[2].installedStr],
+                      "4":["SSH Server",ProgramLST[3].installedStr],
+                      "5":["MySQL Server",ProgramLST[4].installedStr],
+                      "6":["MariaDB Server",ProgramLST[5].installedStr],
+                      "7":["Apache",ProgramLST[6].installedStr],
+                      "8":["Dos 2 Unix converter",ProgramLST[7].installedStr]}
 
 OptionsMenu_Header = ["#", "Settings"]
 OptionsMenu_Items  = {"9":["IP Config"],
@@ -154,7 +169,7 @@ def IP():
 ##############
 # Debug function
 def Debug(var1, var2, TF):
-	DEBUG = True # TODO O_e >..< just omg DEBUG == True will RETURN TRUE DIRECTLY AFTER ASSIGNMENT O_e >..< bleh
+	DEBUG = True # flip de switch >..<
 	if DEBUG == True and TF == True: #
 		print(var1 +' = ' + var2)
 			
@@ -170,9 +185,9 @@ def main():
     MyOS.Clear()
     # grab user once
     
-    print('Welcome to the Collective Industries Tools.') # TODO see where that users goes and why its not in the com class
+    print('Welcome to the Collective Industries Tools.')
     print('')
-    usr.Login()
+    usr.Login() # Handle login prompt externally
     print('Installations')
     ProgramMenu.Print()
     OptionsMenu.Print()
@@ -180,11 +195,18 @@ def main():
 
     for case in com.switch(input('Select: ').lower()):
         if case("e"):
-            exit()
+            exit(0)
             break
-        if case("1"):
+        if case("1"): pass
+        if case("2"): pass
+        if case("3"): pass
+        if case("4"): pass
+        if case("5"): pass
+        if case("6"): pass
+        if case("7"): pass
+        if case("8"):
             MyOS.Clear()
-            print("Running GitHub install/uninstall")
+            print("Running {} install/uninstall".format())
             time.sleep(DELAY)
             git() # TODO Make a task class to call values from a dict
             break

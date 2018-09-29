@@ -1,3 +1,4 @@
+import getpass
 # User Object
 class MyUser():
     """Defines a User Object"""

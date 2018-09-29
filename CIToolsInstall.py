@@ -63,82 +63,80 @@ OptionsMenu.Align(OptionsMenu_Header[1],"l")
 #########################################
 ## Program Install/Uninstall Functions ##
 #########################################
-# GitHub Instal/Uninstall Function
+# GitHub Install/Uninstall Function
 def git():
-	"""GitHub Installation handle"""
-	MyOS.Clear()
-	if ProgramMenu_Items["1"][2] == 'Installed':
-		# GitHub Uninstaller
+    """GitHub Installation handle"""
+    MyOS.Clear()
+    install_check('git', '1')
+    #if ProgramMenu_Items["1"][2] == 'Installed':
+    # GitHub Uninstaller
 
-		if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["1"][1])):
-			os.system('sudo apt-get --purge remove -y git') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
-		else:
-			main()
-	else:
-		print('Getting ready to install GitHub.')
-		time.sleep(DELAY)
-		git_install()
-		print('GitHub is now installed')
-		time.sleep(DELAY)
-		main()
-	
+    #    if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["1"][1])):
+    #        os.system('sudo apt-get --purge remove -y git') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
+    #    else:
+    #        main()
+    #else:
+    #    print('Getting ready to install GitHub.')
+    #    time.sleep(DELAY)
+    #    git_install()
+    #    print('GitHub is now installed')
+    #    time.sleep(DELAY)
+    #    main()
 
 def gcc():
-	"""GitHub Instal/Uninstall Function"""
-	MyOS.Clear()
-	if ProgramMenu_Items["2"][2] == 'Installed': 
-		# GCC Uninstaller
-		if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["2"][1])):
-			os.system('sudo apt-get --purge remove -y build-essential') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
-		else:
-			main()
-	else:
-		print('Getting ready to install GCC.')
-		time.sleep(DELAY)
-		gcc_install()
-		print('GCC is now installed')
-		time.sleep(DELAY)
-		main()
-				
+    """GitHub Instal/Uninstall Function"""
+    MyOS.Clear()
+    if ProgramMenu_Items["2"][2] == 'Installed': 
+        # GCC Uninstaller
+        if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["2"][1])):
+            os.system('sudo apt-get --purge remove -y build-essential') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
+        else:
+            main()
+    else:
+        print('Getting ready to install GCC.')
+        time.sleep(DELAY)
+        gcc_install()
+        print('GCC is now installed')
+        time.sleep(DELAY)
+        main()
+
 # CIFS Filesystem Install/Uninstall
 def cifs():
-	# CIFS Installation
-	MyOS.Clear()
-	Debug('CIFS Program Check', ProgramMenu_Items["3"][2], False) 
-	time.sleep(DELAY)
-	if ProgramMenu_Items["3"][2] == False:
-		print('Getting ready to install CIFS Filesystem.')
-		time.sleep(DELAY)
-		cifs_install()
-		print('CIFS Filesystem is now installed')
-		time.sleep(DELAY)
-		main()
-	elif ProgramMenu.Confirm("Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.".format(ProgramMenu_Items["3"][1])):
-        os.system('sudo apt-get --purge remove -y cifs-utils') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O
+    # CIFS Installation
+    MyOS.Clear()
+    Debug('CIFS Program Check', ProgramMenu_Items["3"][2], False) 
+    time.sleep(DELAY)
+    if ProgramMenu_Items["3"][2] == False:
+        installer._cifs_()
+        print('CIFS Filesystem is now installed')
+        time.sleep(DELAY)
+        main()
+    elif ProgramMenu.Confirm("Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.".format(ProgramMenu_Items["3"][1])):
+        os.system('sudo apt-get --purge remove -y cifs-utils') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
         main()
     else:
         main()
 
 # SSH Server Install/Uninstall
 def ssh():
-	# SSH Installation
-	MyOS.Clear()
-	Debug('SSH Program Check', ProgramMenu_Items["4"][2], False)
-	time.sleep(DELAY)
-	if ProgramMenu_Items["4"][2] == False:
-		print('Getting ready to install SSH Server.')
-		time.sleep(DELAY)
-		ssh_install()
-		print('SSH Server is now installed')
-		time.sleep(DELAY)
-		main()
-	else:
-		# SSH Uninstaller
-		if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["4"][1])):
-			os.system('sudo apt-get --purge remove -y openssh-server') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
-			main()
-		else:
-			main()
+    # SSH Installation
+    MyOS.Clear()
+    Debug('SSH Program Check', ProgramMenu_Items["4"][2], False) 
+    time.sleep(DELAY)
+    if ProgramMenu_Items["4"][2] == False: 
+        print('Getting ready to install SSH Server.')
+        time.sleep(DELAY)
+        ssh_install()
+        print('SSH Server is now installed')
+        time.sleep(DELAY)
+        main()
+    else:
+        # SSH Uninstaller
+        if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["4"][1])):
+            os.system('sudo apt-get --purge remove -y openssh-server') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
+            main()
+        else:
+            main()
 
 ####################
 ## Configurations ##

@@ -17,25 +17,25 @@
 ## Imports ##
 #############
 from lib import com
-import sys
-import subprocess
-import re, menu
-
+from subprocess import Popen, PIPE
+import users, shlex, sys, subprocess, re, menu
 
 ###############
 ## Variables ##
 ###############
 MyOS = com._OS_()
 MyOSType = MyOS._type_
+usr = users.MyUser()
 
-# um O_e
 def _IsInstalled(_progname):
     """Checks to see if a program is installed or not"""
-    status = subprocess.getstatusoutput("dpkg-query -W -f='${Status}' " + _progname) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
-    if not status[0]:
-        return True
-    else:
-        return False
+    status = subprocess.call("aptitude search {}".format(self.ProgName)
+    #status = subprocess.getstatusoutput("dpkg-query -W -f='${Status}' " + _progname) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
+
+    #if not status[0]:
+    #    return True
+    #else:
+    #    return False
 
 # Install Object
 # Atributes
@@ -50,7 +50,7 @@ def _IsInstalled(_progname):
 def RunSubProc(*args): # TODO Exception: [Errno 2] No such file or directory Might Need PIPE handling for sudo and echo https://docs.python.org/3/library/subprocess.html#popen-objects
         """Run Subprocess and catch exeptions"""
         try:
-            retcode = subprocess.call(args, shell=False)
+            retcode = subprocess.call(args, shell=True)
             if retcode < 0:
                 print("Child was terminated by signal", -retcode, file=sys.stderr)
             else:
@@ -85,19 +85,24 @@ class Program(object):
 
     def UserEntryPoint(self):
         """not sure what goes here yet"""
-        print("{} object {} {}".format(self.ProgName,"Said","Hello"))
+        if self.INSTALLED: 
+            self.Purge()
+        else:
+            Upgrade(usr.PassWord)
+            self.Install()
+        #print("{} object {} {}".format(self.ProgName,"Said","Hello"))
 
     def _frmtStr(self):
         """Return a print ready true/false green/red"""
-        _strEnd_ = "{}{}".format(self.INSTALLED,com.color.END)
+        _strEnd_ = "{}".format(com.color.END)
         if self.INSTALLED:
-            return "{}{}".format(com.color.OKGREEN,_strEnd_)
+            return "{}Installed{}".format(com.color.OKGREEN,_strEnd_)
         else:
-            return "{}{}".format(com.color.FAIL,_strEnd_)
+            return "{}Not Installed{}".format(com.color.FAIL,_strEnd_)
 
     def Install(self):
         """"Install package on system"""
-        RunSubProc('{} aptitude --purge remove -y '+ self.ProgName)
+        RunSubProc('{} aptitude install -y '+ self.ProgName)
 
     def _serviceUp(self):
         """Start service"""

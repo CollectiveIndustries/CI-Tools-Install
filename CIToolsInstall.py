@@ -19,6 +19,7 @@ import shutil, os, subprocess, getpass, time, menu, progs
 
 # Build Objecs
 MyOS = com._OS_()
+global usr
 usr = users.MyUser()
 
 ## Unix Only Imports
@@ -191,10 +192,11 @@ def main():
     """Main Entry point"""
     MyOS.Clear()
     # grab user once
-    
+    usr.Login() # Handle login prompt externally
+    MyOS.Clear()
+
     print('Welcome to the Collective Industries Tools.')
     print('')
-    usr.Login() # Handle login prompt externally
     print('Installations')
     ProgramMenu.Print()
     OptionsMenu.Print()

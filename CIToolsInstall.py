@@ -122,15 +122,15 @@ def main():
     MyOS.Clear()
     # grab user once
     usr.Login() # Handle login prompt externally
-    MyOS.Clear()
     while True:
+        MyOS.Clear() # Clear screen every time we redraw menu
         ProgramMenu.Print()
         OptionsMenu.Print()
         print("")
 
         option = input('Select: ').lower()
 
-        # if its a program option then run program object
+        # if its a program option then run program object entrypoint
         if int(option) <= len(ProgramLST): 
             CallProg(ProgramLST,int(option))
 

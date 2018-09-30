@@ -11,7 +11,7 @@
 # In the official python documentation we can read that subprocess should be used
 # for accessing system commands.
 #
-# https://docs.python.org/3/library/subprocess.html
+# https://docs.python.org/3/library/subprocess.html#popen-objects
 
 #############
 ## Imports ##
@@ -36,7 +36,7 @@ def RunSubProc(args): # TODO Exception: [WinError 2] The system cannot find the 
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
 
-def RunSudoProc(args): # set up a non blocking read so we can monitor output and provide user feedback on status
+def RunSudoProc(args): # set up a non blocking read so we can monitor output and provide user feedback on status https://eli.thegreenplace.net/2017/interacting-with-a-long-running-child-process-in-python/
         """Run Subprocess with PIPE and catch exeptions
         Return output"""
         p1_arg = "echo {}".format(usr.PassWord)
@@ -51,6 +51,7 @@ def RunSudoProc(args): # set up a non blocking read so we can monitor output and
 
 def Upgrade():
     """Run Environmental upgrade"""
+    print("Preparing system for new package..............")
     RunSudoProc("aptitude -y update")
     RunSudoProc("aptitude -y upgrade")
 

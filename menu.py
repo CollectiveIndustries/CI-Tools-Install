@@ -9,6 +9,7 @@
 from lib import com
 from prettytable import PrettyTable
 
+# See link for info http://zetcode.com/python/prettytable/
 class TextMenu(object):
     """Defines a Text Menu Object"""
     _items_ = {}
@@ -20,6 +21,16 @@ class TextMenu(object):
             self._menu_.field_names = []
         else:
             self._menu_.field_names = ColHeaders
+            for option, text in _items_.items():
+                self._menu_.add_row([option]+ text)
+
+    def Redraw(self,_items_=None):
+        """Updates menu with new items"""
+        self._menu_.clear_rows()
+        if _items_ is None:
+            self._items_ = {}
+            self._menu_.field_names = []
+        else:
             for option, text in _items_.items():
                 self._menu_.add_row([option]+ text)
 

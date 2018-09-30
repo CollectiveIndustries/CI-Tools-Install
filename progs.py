@@ -129,14 +129,14 @@ class Program(object):
 
     def Install(self):
         """"Install package on system"""
-        RunSubProc('{} aptitude install -y '+ self.ProgName)
+        RunSudoProc('aptitude install -y '+ self.ProgName)
 
     def _serviceUp(self):
         """Start service"""
-        _ctlStartCMD_ = "{} systemctl start {}.service".format(self._sudo_,self._servicename_)
-        _ctlEnableCMD_ = '{} systemctl enable {}.service'.format(self._sudo_,self._servicename_)
-        RunSubProc(_ctlStartCMD_)
-        RunSubProc(_ctlEnableCMD_)
+        _ctlStartCMD_ = "systemctl start {}.service".format(self._servicename_)
+        _ctlEnableCMD_ = 'systemctl enable {}.service'.format(self._servicename_)
+        RunSudoProc(_ctlStartCMD_)
+        RunSudoProc(_ctlEnableCMD_)
 
     def _serviceDown(self):
         """Start service"""
@@ -145,14 +145,14 @@ class Program(object):
 
     def _serviceRestart(self):
         """Start service"""
-        _ctlRestartCMD_ = "{} systemctl retart {}.service".format(self._sudo_,self._servicename_)
-        RunSubProc(_ctlRestartCMD_)
+        _ctlRestartCMD_ = "systemctl retart {}.service".format(self._servicename_)
+        RunSudoProc(_ctlRestartCMD_)
         return
 
     def Purge(self):
         """"Purge package from system"""
         if TextMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always reinstall it later.'.format(self.ProgName)):
-            RunSubProc('{} aptitude --purge remove -y {}'.format(self._sudo_,self.ProgName))
+            RunSudoProc('aptitude --purge remove -y {}'.format(self.ProgName))
             self.INSTALLED = False
 
     def _gitConfig_():

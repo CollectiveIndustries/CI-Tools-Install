@@ -123,7 +123,6 @@ def main():
     # grab user once
     usr.Login() # Handle login prompt externally
     while True:
-        MyOS.Clear() # Clear screen every time we redraw menu
         ProgramMenu.Print()
         OptionsMenu.Print()
         print("")
@@ -133,6 +132,9 @@ def main():
         # if its a program option then run program object entrypoint
         if int(option) <= len(ProgramLST): 
             CallProg(ProgramLST,int(option))
+            ProgramMenu.Redraw(ProgramMenu_Items)
+            ProgramMenu.Print()
+            MyOS.Clear() # Clear screen every time we redraw menu
 
         for case in com.switch(option): # define only non program menu options I.E Letters TODO Maybe add a page function for longer lists?
             if case("e"):

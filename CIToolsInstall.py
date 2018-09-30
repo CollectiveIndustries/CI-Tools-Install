@@ -74,16 +74,6 @@ OptionsMenu = menu.TextMenu(OptionsMenu_Items,OptionsMenu_Header)
 OptionsMenu.Align(OptionsMenu_Header[1],"l")
 
 ####################
-## Program Driver ##
-####################
-
-def CallProg(proglist=[],usrChoice=1):
-    """Compares the prog list with the menu dict and calls the setup()"""
-    indx = usrChoice
-    
-
-
-####################
 ## Configurations ##
 ####################
 # IP Configuration
@@ -129,7 +119,10 @@ def main():
         print("")
 
         option = input('Select: ').lower()
-
+        
+        ####################
+        ## Program Driver ##
+        ####################
         # if its a program option then run program object entrypoint
         try:
             if int(option) <= len(ProgramLST): 
@@ -137,9 +130,8 @@ def main():
                 ProgramLST[option-1].UserEntryPoint() # 0 based List Index
                 ProgramLST[option-1].Update()
                 for k,v in ProgramMenu_Items.items():
-                    print(k,v)
                     if k == (option): # 1 based Menu Index
-                        ProgramMenu_Items[k] = [v[0],ProgramLST[option-1].installedStr] # append the display string redraw menu
+                        ProgramMenu_Items[k] = [v[0],ProgramLST[option-1].installedStr] # append the new display string redraw menu
                         break
                 ProgramMenu.Refresh(ProgramMenu_Items)
         except ValueError: # Maybe it was a letter passed and not an int

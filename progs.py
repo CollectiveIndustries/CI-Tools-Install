@@ -35,9 +35,10 @@ def RunSubProc(args): # TODO Exception: [WinError 2] The system cannot find the 
             return p1.communicate()[0]
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
-            
 
-def RunSudoProc(args): # set up a non blocking read so we can monitor output and provide user feedback on status https://eli.thegreenplace.net/2017/interacting-with-a-long-running-child-process-in-python/
+# TODO fix sudo being called if already root
+# set up a non blocking read so we can monitor output and provide user feedback on status https://eli.thegreenplace.net/2017/interacting-with-a-long-running-child-process-in-python/
+def RunSudoProc(args): 
         """Run Subprocess with PIPE and catch exeptions
         Return output"""
         p1_arg = "echo {}".format(usr.PassWord)
@@ -49,7 +50,6 @@ def RunSudoProc(args): # set up a non blocking read so we can monitor output and
             return p2.communicate()[0]
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
-                
 
 def Upgrade():
     """Run Environmental upgrade"""

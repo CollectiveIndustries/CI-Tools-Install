@@ -132,8 +132,7 @@ def main():
         # if its a program option then run program object entrypoint
         if int(option) <= len(ProgramLST): 
             CallProg(ProgramLST,int(option))
-            ProgramMenu.Redraw(ProgramMenu_Items)
-            ProgramMenu.Print()
+            ProgramMenu.Refresh(ProgramMenu_Items)
             MyOS.Clear() # Clear screen every time we redraw menu
 
         for case in com.switch(option): # define only non program menu options I.E Letters TODO Maybe add a page function for longer lists?

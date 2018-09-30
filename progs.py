@@ -32,9 +32,10 @@ def RunSubProc(args): # TODO Exception: [WinError 2] The system cannot find the 
         """Run Subprocess and catch exeptions"""
         try:
             p1 = Popen(shlex.split(args), stdout=PIPE)
-            return p1.communicate()[0]
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
+        finally:
+            return p1.communicate()[0]
 
 def RunSudoProc(args): # set up a non blocking read so we can monitor output and provide user feedback on status https://eli.thegreenplace.net/2017/interacting-with-a-long-running-child-process-in-python/
         """Run Subprocess with PIPE and catch exeptions
@@ -45,9 +46,10 @@ def RunSudoProc(args): # set up a non blocking read so we can monitor output and
             p1 = Popen(shlex.split(p1_arg), stdout=PIPE)
             p2 = Popen(shlex.split(p2_arg), stdin=p1.stdout, stdout=PIPE)
             p1.stdout.close()  # Allow p1 to receive a SIGPIPE if p2 exits.
-            return p2.communicate()[0]
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
+        finally:
+                return p2.communicate()[0]
 
 def Upgrade():
     """Run Environmental upgrade"""
@@ -88,6 +90,10 @@ class Program(object):
             self._servicename_ = srvcname
             self.INSTALLED = self._is_installed()
             self.installedStr = self._frmtStr()
+    def Update(self):
+        """Updates Program object with values"""
+        self.INSTALLED = self._is_installed()
+        self.installedStr = self._frmtStr()
 
     def _is_installed(self):
         """Call a subproc with aptitude and search for name"""
@@ -130,6 +136,7 @@ class Program(object):
     def Install(self):
         """"Install package on system"""
         RunSudoProc('aptitude install -y '+ self.ProgName)
+        self.Update()
 
     def _serviceUp(self):
         """Start service"""
@@ -151,9 +158,10 @@ class Program(object):
 
     def Purge(self):
         """"Purge package from system"""
-        if TextMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always reinstall it later.'.format(self.ProgName)):
-            RunSudoProc('aptitude --purge remove -y {}'.format(self.ProgName))
+        if TextMenu.Confirm('You are about to remove {} from your machine.\nYou can always reinstall it later.'.format(self.ProgName),''):
+            RunSudoProc('aptitude remove -y {}'.format(self.ProgName))
             self.INSTALLED = False
+            self.Update()
 
     def _gitConfig_():
         gname = input('What name would you like to use?: ')

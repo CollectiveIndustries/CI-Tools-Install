@@ -24,7 +24,7 @@ class TextMenu(object):
             for option, text in _items_.items():
                 self._menu_.add_row([option]+ text)
 
-    def Redraw(self,_items_=None):
+    def Refresh(self,_items_=None):
         """Updates menu with new items"""
         self._menu_.clear_rows()
         if _items_ is None:

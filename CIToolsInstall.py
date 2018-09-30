@@ -79,8 +79,8 @@ OptionsMenu.Align(OptionsMenu_Header[1],"l")
 
 def CallProg(proglist=[],usrChoice=1):
     """Compares the prog list with the menu dict and calls the setup()"""
-    indx = usrChoice-1
-    proglist[indx].UserEntryPoint()
+    indx = usrChoice
+    
 
 
 ####################
@@ -130,14 +130,23 @@ def main():
         option = input('Select: ').lower()
 
         # if its a program option then run program object entrypoint
-        if int(option) <= len(ProgramLST): 
-            CallProg(ProgramLST,int(option))
-            ProgramMenu.Refresh(ProgramMenu_Items)
-            MyOS.Clear() # Clear screen every time we redraw menu
-
-        for case in com.switch(option): # define only non program menu options I.E Letters TODO Maybe add a page function for longer lists?
-            if case("e"):
-                exit(0)
+        try:
+            if int(option) <= len(ProgramLST): 
+                option = int(option) - 1
+                ProgramLST[option].UserEntryPoint()
+                ProgramLST[option].Update()
+                print(ProgramLST[option].installedStr)
+                for k,v in ProgramMenu_Items.items():
+                    print(k,v)
+                    if k == option:
+                        print(ProgramLST[option-1].installedStr)
+                        del v[-1] # chop the last item
+                        ProgramMenu_Items[k] = v.append(ProgramLST[int(option-1)].installedStr) # replace the display string redraw menu
+                ProgramMenu.Refresh(ProgramMenu_Items)
+                MyOS.Clear() # Clear screen every time we redraw menu
+        except ValueError: # Maybe it was a letter passed and not an int
+            for case in com.switch(option): # define only non program menu options I.E Letters TODO Maybe add a page function for longer lists?
+                if case("e"): exit(0)
                 
 # Pythons built in main entrypoint
 # calls init and runs main loop

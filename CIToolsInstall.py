@@ -153,7 +153,6 @@ def main():
 
     # if its a program option run an full upgrade and then run program
     if int(option) <= len(ProgramLST): 
-        progs.Upgrade(usr.PassWord)
         CallProg(ProgramLST,int(option))
 
     for case in com.switch(option): # define only non program menu options I.E Letters

@@ -28,14 +28,7 @@ MyOS = com._OS_()
 MyOSType = MyOS._type_
 usr = users.MyUser()
 
-def RunSubProc(_progname):
-    """Checks to see if a program is installed or not"""
-    args = "aptitude search --disable-columns {}".format(_progname) #  --disable-columns - Parse friendly
-    aptsearch = Popen(shlex.split(args), stdout=PIPE)
-    output = aptsearch.communicate()[0]
-    return output
-
-def RunSubProc(*args): # TODO Exception: [Errno 2] No such file or directory Might Need PIPE handling for sudo and echo https://docs.python.org/3/library/subprocess.html#popen-objects
+def RunSubProc(args): # TODO Exception: [Errno 2] No such file or directory Might Need PIPE handling for sudo and echo https://docs.python.org/3/library/subprocess.html#popen-objects
         """Run Subprocess and catch exeptions"""
         try:
             p1 = Popen(shlex.split(args), stdout=PIPE)
@@ -43,7 +36,7 @@ def RunSubProc(*args): # TODO Exception: [Errno 2] No such file or directory Mig
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
 
-def RunSudoProc(*args):
+def RunSudoProc(args):
         """Run Subprocess with PIPE and catch exeptions
         Return output"""
         p1_arg = "echo {}".format(usr.PassWord)
@@ -86,34 +79,44 @@ class Program(object):
             #exit(1) # exit return failure to shell Following options are for DEBUG in win32 ONLY
             self.ProgName = name
             self._servicename_ = srvcname
-            self.INSTALLED = RunSubProc(self.ProgName)
+            self.INSTALLED = self._is_installed()
             self.installedStr = self._frmtStr()
         else:
             # set variables and init stuff
             self.ProgName = name
             self._servicename_ = srvcname
-            self.INSTALLED = RunSubProc(self.ProgName)
+            self.INSTALLED = self._is_installed()
             self.installedStr = self._frmtStr()
+
+    def _is_installed(self):
+        """Call a subproc with aptitude and search for name"""
+        argstr = "aptitude search --disable-columns {}".format(self.ProgName) #  --disable-columns - Parse friendly
+        status = self._AptParse_(RunSubProc(argstr))
+        if status == 'i':
+            return True
+        else:
+            return False
 
     def UserEntryPoint(self):
         """not sure what goes here yet"""
         if self.INSTALLED: 
             self.Purge()
         else:
-            Upgrade(usr.PassWord)
+            Upgrade()
             self.Install()
         #print("{} object {} {}".format(self.ProgName,"Said","Hello"))
 
-    def AptParse(results=b''):
-    """Parse the results from apt return status
-    see man aptitude for more details on package status"""
-    tmpStr = results.decode() # asume utf-8 and decode
-    LineArray = tmpStr.split(sep='\n') # Parse each line into an array (list)
-    del LineArray[-1] # None of that >..<
-    for line in LineArray:
-        item_lst = line.split(maxsplit=3)
-        if self.ProgName == item_lst[1]: 
-            return item_lst[0]
+    def _AptParse_(self,results=b''):
+        """Parse the results from apt return status
+        see man aptitude for more details on package status"""
+        tmpStr = results.decode() # asume utf-8 and decode
+        LineArray = tmpStr.split(sep='\n') # Parse each line into an array (list)
+        item_lst = []
+        del LineArray[-1] # None of that >..<
+        for line in LineArray:
+            item_lst = line.split(maxsplit=3)
+            if self.ProgName == item_lst[1]: 
+                return item_lst[0]
 
     def _frmtStr(self):
         """Return a print ready true/false green/red"""

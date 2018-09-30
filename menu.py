@@ -32,7 +32,7 @@ class TextMenu(object):
             self._menu_.field_names = []
         else:
             for option, text in _items_.items():
-                self._menu_.add_row([option]+ text)
+                self._menu_.add_row([option]+text)
 
     def Align(self, header="", alignment="l"):
         """Aligns a menu col
@@ -42,7 +42,7 @@ class TextMenu(object):
     def Confirm(self, prompt="", option=""):
         """Confirm dialog
         :option: can be left blank depending on :prompt:"""
-        confirm = "{}{}{} {} Are you sure (y/n)?"
+        confirm = "{}{}{} {} Are you sure (y/n)? "
         answer = input(confirm.format(com.color.WARNING, prompt, com.color.END, option)).lower()
         if answer == "y":
             return True

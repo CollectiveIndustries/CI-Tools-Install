@@ -123,6 +123,7 @@ def main():
     # grab user once
     usr.Login() # Handle login prompt externally
     while True:
+        MyOS.Clear() # Clear screen every time we redraw menu
         ProgramMenu.Print()
         OptionsMenu.Print()
         print("")
@@ -132,18 +133,15 @@ def main():
         # if its a program option then run program object entrypoint
         try:
             if int(option) <= len(ProgramLST): 
-                option = int(option) - 1 # zero index list
-                ProgramLST[option].UserEntryPoint()
-                ProgramLST[option].Update()
-                print(ProgramLST[option].installedStr)
+                option = int(option)  # 1 based Menu Index
+                ProgramLST[option-1].UserEntryPoint() # 0 based List Index
+                ProgramLST[option-1].Update()
                 for k,v in ProgramMenu_Items.items():
                     print(k,v)
-                    if k == option:
-                        print(ProgramLST[option].installedStr)
-                        del v[-1] # chop the last item
-                        ProgramMenu_Items[k] = v.append(ProgramLST[option].installedStr) # replace the display string redraw menu
+                    if k == (option): # 1 based Menu Index
+                        ProgramMenu_Items[k] = [v[0],ProgramLST[option-1].installedStr] # append the display string redraw menu
+                        break
                 ProgramMenu.Refresh(ProgramMenu_Items)
-                MyOS.Clear() # Clear screen every time we redraw menu
         except ValueError: # Maybe it was a letter passed and not an int
             for case in com.switch(option): # define only non program menu options I.E Letters TODO Maybe add a page function for longer lists?
                 if case("e"): exit(0)

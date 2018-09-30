@@ -36,7 +36,7 @@ def RunSubProc(args): # TODO Exception: [WinError 2] The system cannot find the 
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
 
-def RunSudoProc(args):
+def RunSudoProc(args): # set up a non blocking read so we can monitor output and provide user feedback on status
         """Run Subprocess with PIPE and catch exeptions
         Return output"""
         p1_arg = "echo {}".format(usr.PassWord)

@@ -28,68 +28,72 @@ MyOS = com._OS_()
 MyOSType = MyOS._type_
 usr = users.MyUser()
 
-def _IsInstalled(_progname):
+def RunSubProc(_progname):
     """Checks to see if a program is installed or not"""
-    args = "aptitude search {}".format(_progname)
+    args = "aptitude search --disable-columns {}".format(_progname) #  --disable-columns - Parse friendly
     aptsearch = Popen(shlex.split(args), stdout=PIPE)
     output = aptsearch.communicate()[0]
-    for line in output:
-        if output[0] == 'i' and output[1] == _progname:
-            return 'Installed'
-        else:
-            return 'Not Installed'
-    # do something with output
-    #status = subprocess.getstatusoutput("dpkg-query -W -f='${Status}' " + _progname) # TODO https://www.tecmint.com/difference-between-apt-and-aptitude/
-    #if not status[0]:
-    #    return True
-    #else:
-    #    return False
-
-# Install Object
-# Atributes
-#   _progname_ = ""
-# Methods
-#   _IsInstalled(self)
-#   _DoInstall(self)
-#   _Uninstall(self)
-#   run(start_params)
-#
+    return output
 
 def RunSubProc(*args): # TODO Exception: [Errno 2] No such file or directory Might Need PIPE handling for sudo and echo https://docs.python.org/3/library/subprocess.html#popen-objects
         """Run Subprocess and catch exeptions"""
         try:
-            retcode = subprocess.call(args, shell=True)
-            if retcode < 0:
-                print("Child was terminated by signal", -retcode, file=sys.stderr)
-            else:
-                print("Child returned", retcode, file=sys.stderr)
+            p1 = Popen(shlex.split(args), stdout=PIPE)
+            return p1.communicate()[0]
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
 
-def Upgrade(sudopass=""):
+def RunSudoProc(*args):
+        """Run Subprocess with PIPE and catch exeptions
+        Return output"""
+        p1_arg = "echo {}".format(usr.PassWord)
+        p2_arg = "sudo -S {}".format(args)
+        try:
+            p1 = Popen(shlex.split(p1_arg), stdout=PIPE)
+            p2 = Popen(shlex.split(p2_arg), stdin=p1.stdout, stdout=PIPE)
+            p1.stdout.close()  # Allow p1 to receive a SIGPIPE if p2 exits.
+            return p2.communicate()[0]
+        except OSError as e:
+            print("Execution failed:", e, file=sys.stderr)
+
+def Upgrade():
     """Run Environmental upgrade"""
-    RunSubProc("echo {} | sudo -S  aptitude -y update".format(sudopass))
-    RunSubProc("echo {} | sudo -S  aptitude -y upgrade".format(sudopass))
-    
+    RunSudoProc("aptitude -y update")
+    RunSudoProc("aptitude -y upgrade")
+
+# Program Object
+# Atributes
+#   str ProgName
+#   bool INSTALLED
+#   str installedStr -- red/green not/installed formated string
+#
+#
+# Methods
+#   __init__                initilizes Atributes
+#   Install(self)           Install Program
+#   Purge(self)             Remove program and cleanup
+#   _serviceDown(self)      If prog comes with a service this turns it off AND disables it (maybe we can change that?)
+#   _serviceRestart(self)   If prog comes with a service Restarts it
+#   _serviceUp(self)        If prog comes with a service Starts AND Enables it (maybe we can change that?)
+#   _gitConfig_()           # TODO this doesnt really belong in ALL the program objects. not sure where this goes yet.
+
 class Program(object):
     """Defines a program that can be manipulated"""
-    def __init__(self, name="", srvcname="",sudopass=""):
+    def __init__(self, name="", srvcname=""):
         """"Initilize object"""
         if MyOSType == "win32":
             print("Sorry Windows is not supported at this time :( we are working on it we promise.")
             #exit(1) # exit return failure to shell Following options are for DEBUG in win32 ONLY
             self.ProgName = name
             self._servicename_ = srvcname
-            self.INSTALLED = _IsInstalled(self.ProgName)
+            self.INSTALLED = RunSubProc(self.ProgName)
             self.installedStr = self._frmtStr()
-            self._sudo_ = "echo {} | sudo -S".format(sudopass)
         else:
             # set variables and init stuff
             self.ProgName = name
             self._servicename_ = srvcname
-            self.INSTALLED = _IsInstalled(self.ProgName)
+            self.INSTALLED = RunSubProc(self.ProgName)
             self.installedStr = self._frmtStr()
-            self._sudo_ = "echo {} | sudo -S".format(sudopass)
 
     def UserEntryPoint(self):
         """not sure what goes here yet"""
@@ -99,6 +103,17 @@ class Program(object):
             Upgrade(usr.PassWord)
             self.Install()
         #print("{} object {} {}".format(self.ProgName,"Said","Hello"))
+
+    def AptParse(results=b''):
+    """Parse the results from apt return status
+    see man aptitude for more details on package status"""
+    tmpStr = results.decode() # asume utf-8 and decode
+    LineArray = tmpStr.split(sep='\n') # Parse each line into an array (list)
+    del LineArray[-1] # None of that >..<
+    for line in LineArray:
+        item_lst = line.split(maxsplit=3)
+        if self.ProgName == item_lst[1]: 
+            return item_lst[0]
 
     def _frmtStr(self):
         """Return a print ready true/false green/red"""
@@ -138,7 +153,7 @@ class Program(object):
 
     def _gitConfig_():
         gname = input('What name would you like to use?: ')
-        RunSubProc('git config --global user.name "{}"'.format(name)) # TODO what is this for?
+        RunSubProc('git config --global user.name "{}"'.format(name)) # TODO See Progs comment box ^
 
 ####################################################  END CLASS ####################################################
 

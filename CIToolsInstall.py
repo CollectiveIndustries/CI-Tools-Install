@@ -47,7 +47,8 @@ ProgramLST = [Program('git'),
               Program('mysql-server'),
               Program('mariadb-server'),
               Program('apache2'),
-              Program('dos2unix')]
+              Program('dos2unix'),
+              Program('mc')]
 
 ProgramMenu_Items  = {1:["GitHub",ProgramLST[0].installedStr],
                       2:["GCC",ProgramLST[1].installedStr],
@@ -56,10 +57,11 @@ ProgramMenu_Items  = {1:["GitHub",ProgramLST[0].installedStr],
                       5:["MySQL Server",ProgramLST[4].installedStr],
                       6:["MariaDB Server",ProgramLST[5].installedStr],
                       7:["Apache",ProgramLST[6].installedStr],
-                      8:["Dos 2 Unix converter",ProgramLST[7].installedStr]}
+                      8:["Dos 2 Unix converter",ProgramLST[7].installedStr],
+                      9:["Mindnight Commander",ProgramLST[8].installedStr]}
 
 OptionsMenu_Header = ["#", "Settings"]
-OptionsMenu_Items  = {"9":["IP Config"],
+OptionsMenu_Items  = {"10":["IP Config"],
                       "E":["Exit"]
                      }
 

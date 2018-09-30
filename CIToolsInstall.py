@@ -132,16 +132,16 @@ def main():
         # if its a program option then run program object entrypoint
         try:
             if int(option) <= len(ProgramLST): 
-                option = int(option) - 1
+                option = int(option) - 1 # zero index list
                 ProgramLST[option].UserEntryPoint()
                 ProgramLST[option].Update()
                 print(ProgramLST[option].installedStr)
                 for k,v in ProgramMenu_Items.items():
                     print(k,v)
                     if k == option:
-                        print(ProgramLST[option-1].installedStr)
+                        print(ProgramLST[option].installedStr)
                         del v[-1] # chop the last item
-                        ProgramMenu_Items[k] = v.append(ProgramLST[int(option-1)].installedStr) # replace the display string redraw menu
+                        ProgramMenu_Items[k] = v.append(ProgramLST[option].installedStr) # replace the display string redraw menu
                 ProgramMenu.Refresh(ProgramMenu_Items)
                 MyOS.Clear() # Clear screen every time we redraw menu
         except ValueError: # Maybe it was a letter passed and not an int

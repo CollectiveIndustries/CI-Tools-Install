@@ -28,7 +28,7 @@ MyOS = com._OS_()
 MyOSType = MyOS._type_
 usr = users.MyUser()
 
-def RunSubProc(args): # TODO Exception: [Errno 2] No such file or directory Might Need PIPE handling for sudo and echo https://docs.python.org/3/library/subprocess.html#popen-objects
+def RunSubProc(args): # TODO Exception: [WinError 2] The system cannot find the file specified Setup a "win32" test environment for debugging
         """Run Subprocess and catch exeptions"""
         try:
             p1 = Popen(shlex.split(args), stdout=PIPE)

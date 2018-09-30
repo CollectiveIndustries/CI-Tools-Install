@@ -19,6 +19,12 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="debuglib\win32debug.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="debuglib\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="users.py">
       <SubType>Code</SubType>
     </Compile>
@@ -34,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib" />
+    <Folder Include="debuglib\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />

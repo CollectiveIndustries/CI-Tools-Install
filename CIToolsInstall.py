@@ -80,31 +80,8 @@ OptionsMenu.Align(OptionsMenu_Header[1],"l")
 def CallProg(proglist=[],usrChoice=1):
     """Compares the prog list with the menu dict and calls the setup()"""
     indx = usrChoice-1
-    print("Prog: {}\nIndex: {}\n###\n".format(proglist[indx].ProgName,indx))
     proglist[indx].UserEntryPoint()
 
-#########################################
-## Program Install/Uninstall Functions ##
-#########################################
-# GitHub Install/Uninstall Function
-def git():
-    """GitHub Installation handle"""
-    MyOS.Clear()
-    install_check('git', '1')
-    #if ProgramMenu_Items["1"][2] == 'Installed':
-    # GitHub Uninstaller
-
-    #    if ProgramMenu.Confirm('Are you sure you want to remove {} from your machine.\nYou can always Reinstall it later.'.format(ProgramMenu_Items["1"][1])):
-    #        os.system('sudo apt-get --purge remove -y git') # TODO switch from apt-get to Aptitude  Better functionality and easier to script I/O 
-    #    else:
-    #        main()
-    #else:
-    #    print('Getting ready to install GitHub.')
-    #    time.sleep(DELAY)
-    #    git_install()
-    #    print('GitHub is now installed')
-    #    time.sleep(DELAY)
-    #    main()
 
 ####################
 ## Configurations ##
@@ -133,6 +110,11 @@ def Debug(var1, var2, TF):
 def colorPrint(txt,colorStart):
 	print (colorStart+txt+'\033[0m')
 
+def TitleHeader():
+    """Get creative and make it look COOL!!!!"""
+    print('Welcome to the Collective Industries Tools.')
+    print('')
+    print('Installations')
 
 # Main Entry Point
 def main():
@@ -141,26 +123,21 @@ def main():
     # grab user once
     usr.Login() # Handle login prompt externally
     MyOS.Clear()
+    while True:
+        ProgramMenu.Print()
+        OptionsMenu.Print()
+        print("")
 
-    print('Welcome to the Collective Industries Tools.')
-    print('')
-    print('Installations')
-    ProgramMenu.Print()
-    OptionsMenu.Print()
-    print("")
+        option = input('Select: ').lower()
 
-    option = input('Select: ').lower()
+        # if its a program option then run program object
+        if int(option) <= len(ProgramLST): 
+            CallProg(ProgramLST,int(option))
 
-    # if its a program option run an full upgrade and then run program
-    if int(option) <= len(ProgramLST): 
-        CallProg(ProgramLST,int(option))
-
-    for case in com.switch(option): # define only non program menu options I.E Letters
-        if case("e"):
-            exit(0)
-            break
-
-
+        for case in com.switch(option): # define only non program menu options I.E Letters TODO Maybe add a page function for longer lists?
+            if case("e"):
+                exit(0)
+                
 # Pythons built in main entrypoint
 # calls init and runs main loop
 if __name__ == "__main__":

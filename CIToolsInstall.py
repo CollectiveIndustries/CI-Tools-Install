@@ -42,34 +42,6 @@ option = ''
 ###############
 ## Functions ##
 ###############
-def GetOS():
-    """Determins what O/S you are running"""
-    _SystemOS_ == platform.strip()
-    if (_SystemOS_ == 'linux' or _SystemOS_ == 'linux2'):
-        """Linux"""
-        with open('/etc/os-release') as file:
-            oper = file.readlines()
-            oper = oper[5].split('=')
-            return oper[1].strip() # Grab OS release Name we want to know what flavor of linux we use.
-        elif(_SystemOS_ == 'win32'):
-            return _SystemOS_
-
-def OSClear(osname):
-    """Determins how to clear your screen"""
-    if(osname == "win32"):
-        os.system("cls")
-    else: # well its not Windows we can just "clear"
-        os.system("clear")
-
-def is_tool(name):
-    """Check whether `name` is on PATH and marked as executable."""
-    program = which(name)
-    if program == None:
-        install_check = "Not Installed"
-    else:
-        install_check = "Installed" 
-    return install_check
-
 def init():
     oper = GetOS()
     is_tool('python3')
@@ -84,44 +56,29 @@ def init():
         users = user
     main_menu()
 
-##################
-## Menu Builder ##
-##################
-ProgramMenu_Header = ["#","Program","Installed"]
-
-# Menu options on back end
-ProgramLST = [Program('git'),
-              Program('build-essential'),
-              Program('cifs-utils'),
-              Program('openssh-server'),
-              Program('mysql-server'),
-              Program('mariadb-server'),
-              Program('apache2'),
-              Program('dos2unix'),
-              Program('mc')]
-
-ProgramMenu_Items  = {1:["GitHub",ProgramLST[0].installedStr],
-                      2:["GCC",ProgramLST[1].installedStr],
-                      3:["CIFS Filesystem",ProgramLST[2].installedStr],
-                      4:["SSH Server",ProgramLST[3].installedStr],
-                      5:["MySQL Server",ProgramLST[4].installedStr],
-                      6:["MariaDB Server",ProgramLST[5].installedStr],
-                      7:["Apache",ProgramLST[6].installedStr],
-                      8:["Dos 2 Unix converter",ProgramLST[7].installedStr],
-                      9:["Mindnight Commander",ProgramLST[8].installedStr]}
-
-OptionsMenu_Header = ["#", "Settings"]
-OptionsMenu_Items  = {"10":["IP Config"],
-                      "E":["Exit"]
-                     }
-
-ProgramMenu = menu.TextMenu(ProgramMenu_Items,ProgramMenu_Header)
-ProgramMenu.Align(ProgramMenu_Header[0],"c")
-ProgramMenu.Align(ProgramMenu_Header[1],"l")
-ProgramMenu.Align(ProgramMenu_Header[2],"r")
-
-OptionsMenu = menu.TextMenu(OptionsMenu_Items,OptionsMenu_Header)
-OptionsMenu.Align(OptionsMenu_Header[1],"l")
+###############
+## Main Menu ##
+###############
+def main_menu():
+    MyOS.Clear()  
+    print('')
+    print ('Installations')
+    print ('1. GitHub ............... ', is_tool('git'))
+    print ('2. GCC .................. ', is_tool('build-essential'))
+    print ('3. CIFS Filesystem ...... ', is_tool('cifs-utils'))
+    print ('4. SSH Server ........... ', is_tool('openssh-server'))
+    print ('5. MySQL Server ......... ', is_tool('mysql-server'))
+    print ('6. MariaDB Server ....... ', is_tool('mariadb-server'))
+    print ('7. Apache ............... ', is_tool('apache2'))
+    print ('8. Dos 2 Unix Converter . ', is_tool('dos2unix'))
+    print ('9. Midnight Commander ... ', is_tools('mc'))
+    print ('')
+    print ('Configurations')
+    #print ('8. Set IP to Static/Dynamic')
+    #print ('9. Config 2')
+    print ('')
+    print ('E. Exit')
+    print ('')
 
 ####################
 ## Configurations ##

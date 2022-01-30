@@ -12,10 +12,9 @@
 #############
 ## Imports ##
 #############
-from lib import com
+from shutil import which
 from progs import Program
-import users
-import shutil, os, subprocess, getpass, time, menu, progs
+import os, pwd, time, subprocess
 
 # Build Objecs
 MyOS = com._OS_()
@@ -31,8 +30,57 @@ if MyOS._type_ != "win32":
 ###############
 ## Variables ##
 ###############
-os_name	= os.name
 DELAY = 2
+oper = ''
+os_name = os.name
+install_check = ''
+user = pwd.getpwuid(os.getuid()) [4]
+option = ''
+
+###############
+## Functions ##
+###############
+def GetOS():
+    """Determins what O/S you are running"""
+    _SystemOS_ == platform.strip()
+    if (_SystemOS_ == 'linux' or _SystemOS_ == 'linux2'):
+        """Linux"""
+        with open('/etc/os-release') as file:
+            oper = file.readlines()
+            oper = oper[5].split('=')
+            return oper[1].strip() # Grab OS release Name we want to know what flavor of linux we use.
+        elif(_SystemOS_ == 'win32'):
+            return _SystemOS_
+
+def OSClear(osname):
+    """Determins how to clear your screen"""
+    if(osname == "win32"):
+        os.system("cls")
+    else: # well its not Windows we can just "clear"
+        os.system("clear")
+
+def is_tool(name):
+    """Check whether `name` is on PATH and marked as executable."""
+    program = which(name)
+    if program == None:
+        install_check = "Not Installed"
+    else:
+        install_check = "Installed" 
+    return install_check
+
+def init():
+    oper = GetOS()
+    is_tool('python3')
+    is_tool('pip')
+    if is_tool('python3') == 'Not Installed':
+        os.system('sudo apt-get install -y python3')
+    
+    global users
+    if user == '':
+        users = uname
+    else:
+        users = user
+    main_menu()
 
 ##################
 ## Menu Builder ##

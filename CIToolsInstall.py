@@ -12,10 +12,11 @@
 #############
 ## Imports ##
 #############
+import platform
 from lib import com
 from shutil import which
 from progs import Program
-import os, pwd, time, subprocess
+import os, pwd, time, subprocess, sys
 
 # Build Objecs
 MyOS = com._OS_()

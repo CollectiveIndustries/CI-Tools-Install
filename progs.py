@@ -16,6 +16,7 @@
 #############
 ## Imports ##
 #############
+from fileinput import FileInput
 from lib import com
 from subprocess import Popen, PIPE
 from menu import TextMenu
@@ -166,7 +167,7 @@ class Program(object):
 
     def _gitConfig_():
         gname = input('What name would you like to use?: ')
-        RunSubProc('git config --global user.name "{}"'.format(name)) # TODO See Progs comment box ^
+        RunSubProc('git config --global user.name "{}"'.format(gname)) # TODO See Progs comment box ^
 
 ####################################################  END CLASS ####################################################
 
@@ -193,7 +194,7 @@ def ip_config():
                 cname = input('What is the name of your Eithernet Adapter? [eth0]: ')
             if cname == None:
                 cname = 'eth0'
-                with fileinput.FileInput('/etc/network/interfaces', implace=True, backup='.bak') as file:
+                with FileInput.FileInput('/etc/network/interfaces', implace=True, backup='.bak') as file:
                     for line in file:
                         print(line.replace(cname, 'replacement text'))
             else:

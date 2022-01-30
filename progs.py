@@ -96,23 +96,14 @@ class Program(object):
         self.INSTALLED = self._is_installed()
         self.installedStr = self._frmtStr()
 
-    #def _is_installed(self):
-    #    """Call a subproc with aptitude and search for name"""
-    #    argstr = "aptitude search --disable-columns {}".format(self.ProgName) #  --disable-columns - Parse friendly
-    #    status = self._AptParse_(RunSubProc(argstr))
-    #    if status == 'i':
-    #        return True
-    #    else:
-    #        return False
-
     def is_tool(name):
-    """Check whether `name` is on PATH and marked as executable."""
-    program = which(name)
-    if program == None:
-        install_check = "Not Installed"
-    else:
-        install_check = "Installed" 
-    return install_check
+        """Check whether `name` is on PATH and marked as executable."""
+        program = which(name)
+        if program == None:
+            install_check = "Not Installed"
+        else:
+            install_check = "Installed" 
+        return install_check
 
     def UserEntryPoint(self):
         """not sure what goes here yet"""

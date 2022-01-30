@@ -12,6 +12,7 @@
 #############
 ## Imports ##
 #############
+from lib import com
 from shutil import which
 from progs import Program
 import os, pwd, time, subprocess

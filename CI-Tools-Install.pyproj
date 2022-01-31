@@ -34,9 +34,6 @@
     <Compile Include="lib\config.py" />
     <Compile Include="lib\dbcon.py" />
     <Compile Include="lib\__init__.py" />
-    <Compile Include="menu.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib" />

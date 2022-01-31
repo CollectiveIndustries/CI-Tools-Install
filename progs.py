@@ -19,7 +19,6 @@
 from fileinput import FileInput
 from lib import com
 from subprocess import Popen, PIPE
-from menu import TextMenu
 from shutil import which
 import users, shlex, sys, subprocess, re
 

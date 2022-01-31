@@ -85,27 +85,27 @@ def main_menu():
 ####################
 # IP Configuration
 def IP():
-	MyOS.Clear()
-	print('Getting ready to Reconfigure your IP')
-	time.sleep(DELAY)
-	ip_config() # TODO see what this is? missing intelisense
-	print('Your IP is now Configured')
-	time.sleep(DELAY)
-	main()
+    MyOS.Clear()
+    print('Getting ready to Reconfigure your IP')
+    time.sleep(DELAY)
+    ip_config() # TODO see what this is? missing intelisense
+    print('Your IP is now Configured')
+    time.sleep(DELAY)
+    main()
 
 ##############
 ##Functions ##
 ##############
 # Debug function
 def Debug(var1, var2, TF):
-	DEBUG = True # flip de switch >..<
-	if DEBUG == True and TF == True: #
-		print(var1 +' = ' + var2)
-			
+    DEBUG = True # flip de switch >..<
+    if DEBUG == True and TF == True: #
+        print(var1 +' = ' + var2)
+
 # Print in color then reset color on end of line.
 # TODO O_e can we please move this to the com class?
 def colorPrint(txt,colorStart):
-	print (colorStart+txt+'\033[0m')
+    print (colorStart+txt+'\033[0m')
 
 def TitleHeader():
     """Get creative and make it look COOL!!!!"""

@@ -1,3 +1,6 @@
 [submodule "lib"]
 	path = lib
 	url = https://github.com/CollectiveIndustries/PythonModules.git
+[submodule "PythonModules"]
+	path = PythonModules
+	url = https://github.com/CollectiveIndustries/PythonModules.git

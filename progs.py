@@ -76,7 +76,8 @@ def Upgrade():
 #   _gitConfig_()           # TODO this doesnt really belong in ALL the program objects. not sure where this goes yet.
 
 class Program(object):
-    """Defines a program that can be manipulated"""
+    """Defines a program or service that can be manipulated
+    name='', srvcname='' sets program and service names respecfully"""
     def __init__(self, name="", srvcname=""):
         """"Initilize object"""
         if MyOSType == "win32":

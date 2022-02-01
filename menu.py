@@ -9,6 +9,7 @@
 from lib import com
 from prettytable import PrettyTable
 
+# TODO #5 Menu config loader
 # See link for info http://zetcode.com/python/prettytable/
 class TextMenu(object):
     """Defines a Text Menu Object"""

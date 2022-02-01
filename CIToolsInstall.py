@@ -38,7 +38,7 @@ DELAY = 2
 ###############
 ## Functions ##
 ###############
-# TODO move this block of code to an SH script. 
+# TODO #4 move this block of code to an SH script. 
 # Frankly if Python3 is _NOT INSTALLED_ how are we running this script?????
 # def init(): 
 #     """Check for and initilize dependancies"""
@@ -61,7 +61,7 @@ def main_menu():
     """Clear screen + build menu"""
     MyOS.Clear()  
     print('')
-    print('Installations') # TODO Compact into Key=Value pair for easy list creation for custom prog lists
+    print('Installations') # TODO #3 Compact into Key=Value pair for easy list creation for custom prog lists
     print('1. GitHub ............... ', MyOS.ProgExists('git'))
     print('2. GCC .................. ', MyOS.ProgExists('build-essential'))
     print('3. CIFS Filesystem ...... ', MyOS.ProgExists('cifs-utils'))
@@ -82,7 +82,7 @@ def main_menu():
 ####################
 ## Configurations ##
 ####################
-# IP Configuration
+# TODO #6 Network Module
 def IP():
 	MyOS.Clear()
 	print('Getting ready to Reconfigure your IP')

@@ -71,6 +71,7 @@ def main_menu():
     print('7. Apache ............... ', MyOS.ProgExists('apache2'))
     print('8. Dos 2 Unix Converter . ', MyOS.ProgExists('dos2unix'))
     print('9. Midnight Commander ... ', MyOS.ProgExists('mc'))
+    print('10. Log Navigator ....... ', MyOS.ProgExists('lnav'))
     print('')
     print('Configurations')
     #print('8. Set IP to Static/Dynamic')
@@ -100,17 +101,6 @@ def Debug(var1, var2, TF):
 	DEBUG = True # flip de switch >..<
 	if DEBUG == True and TF == True: #
 		print(var1 +' = ' + var2)
-			
-# Print in color then reset color on end of line.
-# TODO O_e can we please move this to the com class?
-def colorPrint(txt,colorStart):
-	print (colorStart+txt+'\033[0m')
-
-def TitleHeader():
-    """Get creative and make it look COOL!!!!"""
-    print('Welcome to the Collective Industries Tools.')
-    print('')
-    print('Installations')
 
 # Main Entry Point
 def main():
@@ -125,20 +115,6 @@ def main():
         ####################
         ## Program Driver ##
         ####################
-        # if its a program option then run program object entrypoint
-        # try:
-        #     if int(option) <= len(ProgramLST): 
-        #         option = int(option)  # 1 based Menu Index
-        #         ProgramLST[option-1].UserEntryPoint() # 0 based List Index
-        #         ProgramLST[option-1].Update()
-        #         for k,v in ProgramMenu_Items.items():
-        #             if k == (option): # 1 based Menu Index
-        #                 ProgramMenu_Items[k] = [v[0],ProgramLST[option-1].installedStr] # append the new display string redraw menu
-        #                 break
-        #         ProgramMenu.Refresh(ProgramMenu_Items)
-        # except ValueError: # Maybe it was a letter passed and not an int
-        #     for case in com.switch(option): # define only non program menu options I.E Letters TODO Maybe add a page function for longer lists?
-        #         if case("e"): exit(0)
                 
 # Pythons built in main entrypoint
 # calls init and runs main loop

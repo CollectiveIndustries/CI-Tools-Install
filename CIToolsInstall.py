@@ -13,6 +13,8 @@
 ## Imports ##
 #############
 import platform
+
+from pytest import ExitCode
 from lib import com
 from shutil import which
 from progs import Program
@@ -111,6 +113,8 @@ def main():
     while True:
         main_menu()
         option = input('Select: ').lower()
+        if option.lower() == 'e':
+            exit(0)
         
         ####################
         ## Program Driver ##

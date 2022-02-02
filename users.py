@@ -10,4 +10,4 @@ class MyUser():
         """just initilize values"""
         self.UserName = getpass.getuser().replace(',', '')
         print("Please login to continue.\nUsername = {}".format(self.UserName))
-        self.PassWord = getpass.getpass("Login Password: ")
+        self.PassWord = getpass.getpass("Login Password: ") # TODO #9 Check users login info and reask if wrong

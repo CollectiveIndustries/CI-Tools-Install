@@ -8,6 +8,6 @@ class MyUser():
 
     def Login(self):
         """just initilize values"""
-        self.UserName = getpass.getuser().replace(',', '')
+        self.UserName = getpass.getuser().replace(',', '') # TODO #8 Username not populating
         print("Please login to continue.\nUsername=".format(self.UserName))
         self.PassWord = getpass.getpass("Login Password: ")

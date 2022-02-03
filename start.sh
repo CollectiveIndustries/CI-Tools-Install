@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# First off lets install the requirements.txt
+
+sudo pip install -r requirements.txt
+
 # TODO #4 move this block of code to an SH script. 
 # Frankly if Python3 is _NOT INSTALLED_ how are we running this script?????
 # def init(): 

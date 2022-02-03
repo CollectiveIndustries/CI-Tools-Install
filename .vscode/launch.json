@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "F5 Anything: Shell Script",
+            "type": "f5anything",
+            "request": "launch",
+            "command": "bash start.sh"
+        },
+        
+        {
             "name": "Python: Main() Method",
             "type": "python",
             "request": "launch",

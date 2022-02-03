@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # First off lets install the requirements.txt
-
+# TODO Add if exists check with which
 sudo pip install -r requirements.txt
+
+python3 CIToolsInstall.py
 
 # TODO #4 move this block of code to an SH script. 
 # Frankly if Python3 is _NOT INSTALLED_ how are we running this script?????

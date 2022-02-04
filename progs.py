@@ -55,7 +55,7 @@ def RunSudoProc(args):
 
 def Upgrade():
     """Run Environmental upgrade"""
-    print("Preparing system for new package..............")
+    print("Preparing system for new packages..............")
     RunSudoProc("aptitude -y update")
     RunSudoProc("aptitude -y upgrade")
 

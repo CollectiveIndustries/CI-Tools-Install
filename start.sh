@@ -1,23 +1,21 @@
 #!/bin/bash
 
 # First off lets install the requirements.txt
-# TODO Add if exists check with which
+if ! command -v pip &> /dev/null
+then
+    sudo apt install pip -y
+else
+    echo "Pip already installed...."
+fi
+
 sudo pip install -r requirements.txt
 
-python3 CIToolsInstall.py
+if ! command -v python3 &> /dev/null
+then
+    sudo apt install python3 -y
+else
+    echo "Python3 already installed...."
+fi
 
-# TODO #4 move this block of code to an SH script. 
-# Frankly if Python3 is _NOT INSTALLED_ how are we running this script?????
-# def init(): 
-#     """Check for and initilize dependancies"""
-#     MyOS.ProgExists('python3')
-#     MyOS.ProgExists('pip')
-#     if MyOS.ProgExists('python3') == 'Not Installed':
-#         os.system('sudo apt-get install -y python3')
-    
-#     global users
-#     if user == '':
-#         users = uname
-#     else:
-#         users = user
-#     main_menu()
+# Now the environment is setup lets run the main install/configuration utility
+python3 CIToolsInstall.py

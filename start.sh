@@ -17,5 +17,11 @@ fi
 
 sudo pip install -r requirements.txt
 
+# Set up configuration directory and touch the file.
+# this file should be created using the installer file,
+# however files already present shall be used.
+mkdir -p conf.d
+touch conf.d/conf
+
 # Now the environment is setup lets run the main install/configuration utility
 python3 CIToolsInstall.py

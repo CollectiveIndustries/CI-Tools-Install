@@ -25,6 +25,7 @@
     <Compile Include="debuglib\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="menu.py" />
     <Compile Include="users.py">
       <SubType>Code</SubType>
     </Compile>
@@ -36,10 +37,12 @@
     <Compile Include="lib\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="config.d\" />
     <Folder Include="lib" />
     <Folder Include="debuglib\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config.d\conf" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

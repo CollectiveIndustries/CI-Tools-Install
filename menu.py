@@ -57,7 +57,7 @@ class Menu_Settings:
     GITHUB_DESC = ConfigSectionMap("GitHub")['desc']
 
     GCC_PROG_NAME = ConfigSectionMap("GCC")['prog_name']
-    GCC_DESC = ConfigSectionmap("GCC")['desc']
+    GCC_DESC = ConfigSectionMap("GCC")['desc']
 
     CIFS_PROG_NAME = ConfigSectionMap("CIFS")['prog_name']
     CIFS_DESC = ConfigSectionMap("CIFS")['desc']

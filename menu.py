@@ -15,14 +15,17 @@ from lib import com
 from configparser import ConfigParser
 import os
 
+####################################################################################
+
 ################
 ## Variables  ##
 ################
-ConfigFile = "config.d/menu.cfg"
+ConfigFile = "config.d/main.cfg"
 conf = ConfigParser()
 conf.read(os.path.abspath(ConfigFile))
 conf.sections()
 
+####################################################################################
 
 ## Config Parse Helper ##
 
@@ -51,8 +54,13 @@ def ConfigWrite():
 	conf.write(cfgfile)
 	cfgfile.close()
 
+####################################################################################
+
+######################
+##  Object Classes  ##
+######################
 class Menu_Settings:
-    
+    """Menu configuration setting class"""
     GITHUB_PROG_NAME = ConfigSectionMap("GitHub")['prog_name']
     GITHUB_DESC = ConfigSectionMap("GitHub")['desc']
 
@@ -66,19 +74,17 @@ class Menu_Settings:
     SSH_DESC = ConfigSectionMap("SSH")['desc']
     SSH_PORT = ConfigSectionMap("SSH")['port']
     SSH_KEY = ConfigSectionMap("SSH")['public_key']
-    
-    
+
     MARIA_PROG_NAME = ConfigSectionMap("MariaDB")['prog_name']
     MARIA_DESC = ConfigSectionMap("MariaDB")['desc']
     MARIA_PORT = ConfigSectionMap("MariaDB")['port']
     MARIA_USER = ConfigSectionMap("MariaDB")['user_name']
 
-
     APACHE_PROG_NAME = ConfigSectionMap("Apache")['prog_name']
     APACHE_DESC = ConfigSectionMap("Apache")['desc']
-    
+
     D2U_PROG_NAME = ConfigSectionMap("D2U")['prog_name']
     D2U_DESC = ConfigSectionMap("D2U")['desc']
-        
+
     MC_PROG_NAME = ConfigSectionMap("MC")['prog_name']
     MC_DESC = ConfigSectionMap("MC")['desc']

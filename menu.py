@@ -51,7 +51,7 @@ def ConfigWrite():
 	conf.write(cfgfile)
 	cfgfile.close()
 
-class Settings:
+class Menu_Settings:
     
     GITHUB_PROG_NAME = ConfigSectionMap("GitHub")['prog_name']
     GITHUB_DESC = CConfigSectionMap("GitHub")['desc']

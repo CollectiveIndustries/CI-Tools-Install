@@ -1,75 +1,84 @@
-######################################
-##									##
-##		Collective Industries		##
-##		 	Menu Objects			##
-##									##
-##		  By: Levi & Andrew			##
-##				©2018				##
-######################################
+#!/usr/bin/python3
+
+#############################
+##  Collective Industries  ##
+##          Tools          ##
+##                         ##
+##    By: Levi & Andrew    ##
+##          ©2018          ##
+#############################
+
+###############
+##  Imports  ##
+###############
 from lib import com
-from prettytable import PrettyTable
+from configparser import ConfigParser
+import os
 
-# TODO #5 Menu config loader
-# See link for info http://zetcode.com/python/prettytable/
-class TextMenu(object):
-    """Defines a Text Menu Object"""
-    _items_ = {}
-    def __init__(self,_items_=None, ColHeaders=[]):
-        self._menu_ = PrettyTable()
-        self.Headers = ColHeaders
-        if _items_ is None:
-            self._items_ = {}
-            self._menu_.field_names = []
-        else:
-            self._menu_.field_names = ColHeaders
-            for option, text in _items_.items():
-                self._menu_.add_row([option]+ text)
+################
+## Variables  ##
+################
+ConfigFile = "config.d/menu.cfg"
+conf = ConfigParser()
+conf.read(os.path.abspath(ConfigFile))
+conf.sections()
 
-    def Refresh(self,_items_=None):
-        """Updates menu with new items"""
-        self._menu_.clear_rows()
-        if _items_ is None:
-            self._items_ = {}
-            self._menu_.field_names = []
-        else:
-            for option, text in _items_.items():
-                self._menu_.add_row([option]+text)
 
-    def Align(self, header="", alignment="l"):
-        """Aligns a menu col
-        possible values are l, c, r"""
-        self._menu_.align[header] = alignment
+## Config Parse Helper ##
 
-    def Confirm(self, prompt="", option=""):
-        """Confirm dialog
-        :option: can be left blank depending on :prompt:"""
-        confirm = "{}{}{} {} Are you sure (y/n)? "
-        answer = input(confirm.format(com.color.WARNING, prompt, com.color.END, option)).lower()
-        if answer == "y":
-            return True
-        else:
-            return False
+def ConfigSectionMap(section):
+    dict1 = {}
+    options = conf.options(section)
+    for option in options:
+        try:
+            dict1[option] = conf.get(section, option)
+            if dict1[option] == -1:
+                print("Skipping: %s %s" % (section,option))
+        except:
+            print("Exception on %s %s!" % (section,option))
+            dict1[option] = None
+    return dict1
 
-    def GetInputNonEmpty(self,promt):
-        """Refuse empty answers"""
-        option = None
-        while True:
-            option = input("{}{}:{} [ ] ".format(com.color.HEADER,promt, com.color.END))
-            if option != "":
-                return option
-            option = None
-            print("{}{} cannot be empty!{}".format(com.color.FAIL,promt,com.color.END))
+## Config section writter ##
+def ConfigAddSection(section):
+	conf.add_section(section)
+
+def ConfigSetValue(section,key,value):
+	conf.set(section,key,value)
+
+def ConfigWrite():
+	cfgfile = open(ConfigFile, "wb")
+	conf.write(cfgfile)
+	cfgfile.close()
+
+class Menu_Settings:
     
-    def GetDefaults(self,prompt, defval):
-        """Gets data from user providing a defualt option"""
-        formatstr = "{}{}:{} [ {} ] " # Header color prompt with defualt in [ ]
-        response = input(formatstr.format(com.color.HEADER,prompt, com.color.END, defval))
-        if response == "":
-            return defval
-        else:
-            return response
+    GITHUB_PROG_NAME = ConfigSectionMap("GitHub")['prog_name']
+    GITHUB_DESC = ConfigSectionMap("GitHub")['desc']
 
-    def Print(self):
-        """Print Multichoice menu"""
-        self._menu_.sortby = self._menu_.field_names[0]
-        print(self._menu_)
+    GCC_PROG_NAME = ConfigSectionMap("GCC")['prog_name']
+    GCC_DESC = ConfigSectionMap("GCC")['desc']
+
+    CIFS_PROG_NAME = ConfigSectionMap("CIFS")['prog_name']
+    CIFS_DESC = ConfigSectionMap("CIFS")['desc']
+
+    SSH_PROG_NAME = ConfigSectionMap("SSH")['prog_name']
+    SSH_DESC = ConfigSectionMap("SSH")['desc']
+    SSH_PORT = ConfigSectionMap("SSH")['port']
+    SSH_KEY = ConfigSectionMap("SSH")['public_key']
+    
+    
+    MARIA_PROG_NAME = ConfigSectionMap("MariaDB")['prog_name']
+    MARIA_DESC = ConfigSectionMap("MariaDB")['desc']
+    MARIA_PORT = ConfigSectionMap("MariaDB")['port']
+    MARIA_USER = ConfigSectionMap("MariaDB")['user_name']
+
+
+    APACHE_PROG_NAME = ConfigSectionMap("Apache")['prog_name']
+    APACHE_DESC = ConfigSectionMap("Apache")['desc']
+    
+    D2U_PROG_NAME = ConfigSectionMap("D2U")['prog_name']
+    D2U_DESC = ConfigSectionMap("D2U")['desc']
+        
+    MC_PROG_NAME = ConfigSectionMap("MC")['prog_name']
+    MC_DESC = ConfigSectionMap("MC")['desc']

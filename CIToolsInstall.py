@@ -12,9 +12,6 @@
 #############
 ## Imports ##
 #############
-import platform
-
-from pytest import ExitCode
 from lib import com
 from shutil import which
 from progs import Program
@@ -34,7 +31,6 @@ usr = users.MyUser()
 ## Unix Only Imports
 if MyOS._type_ != "win32":
     import pwd # no module found, UNIX systems ONLY
-    import apt
     user = pwd.getpwuid(os.getuid())[4]
 
 ######################################################################
@@ -57,24 +53,24 @@ def Debug(var1, var2, TF):
 
 def BuildMenu():
     print('')
-    print('Installations') # TODO #3 Compact into Key=Value pair for easy list creation for custom prog lists
-    print('1. GitHub ............... ', MyOS.ProgExists('git'))
-    print('2. GCC .................. ', MyOS.ProgExists('build-essential'))
-    print('3. CIFS Filesystem ...... ', MyOS.ProgExists('cifs-utils'))
-    print('4. SSH Server ........... ', MyOS.ProgExists('openssh-server'))
-    print('5. MySQL Server ......... ', MyOS.ProgExists('mysql-server'))
-    print('6. MariaDB Server ....... ', MyOS.ProgExists('mariadb-server'))
-    print('7. Apache ............... ', MyOS.ProgExists('apache2'))
-    print('8. Dos 2 Unix Converter . ', MyOS.ProgExists('dos2unix'))
-    print('9. Midnight Commander ... ', MyOS.ProgExists('mc'))
-    print('10. Log Navigator ....... ', MyOS.ProgExists('lnav'))
-    print('')
-    print('Configurations')
-    #print('8. Set IP to Static/Dynamic')
-    #print('9. Config 2')
-    print('')
-    print('E. Exit')
-    print('')
+    # print('Installations') # TODO #3 Compact into Key=Value pair for easy list creation for custom prog lists
+    # print('1. GitHub ............... ', MyOS.ProgExists('git'))
+    # print('2. GCC .................. ', MyOS.ProgExists('build-essential'))
+    # print('3. CIFS Filesystem ...... ', MyOS.ProgExists('cifs-utils'))
+    # print('4. SSH Server ........... ', MyOS.ProgExists('openssh-server'))
+    # print('5. MySQL Server ......... ', MyOS.ProgExists('mysql-server'))
+    # print('6. MariaDB Server ....... ', MyOS.ProgExists('mariadb-server'))
+    # print('7. Apache ............... ', MyOS.ProgExists('apache2'))
+    # print('8. Dos 2 Unix Converter . ', MyOS.ProgExists('dos2unix'))
+    # print('9. Midnight Commander ... ', MyOS.ProgExists('mc'))
+    # print('10. Log Navigator ....... ', MyOS.ProgExists('lnav'))
+    # print('')
+    # print('Configurations')
+    # print('8. Set IP to Static/Dynamic')
+    # print('9. Config 2')
+    # print('')
+    # print('E. Exit')
+    # print('')
 
 ####################################################################################
 

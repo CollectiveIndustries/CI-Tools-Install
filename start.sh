@@ -1,6 +1,13 @@
 #!/bin/bash
 
 # First off lets install the requirements.txt
+if ! command -v python3 &> /dev/null
+then
+    sudo apt install python3 -y
+else
+    echo "Python3 already installed...."
+fi
+
 if ! command -v pip &> /dev/null
 then
     sudo apt install pip -y
@@ -9,13 +16,6 @@ else
 fi
 
 sudo pip install -r requirements.txt
-
-if ! command -v python3 &> /dev/null
-then
-    sudo apt install python3 -y
-else
-    echo "Python3 already installed...."
-fi
 
 # Now the environment is setup lets run the main install/configuration utility
 python3 CIToolsInstall.py

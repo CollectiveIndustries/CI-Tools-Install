@@ -21,9 +21,14 @@ from progs import Program
 import os, pwd, time, subprocess, sys
 import users
 
+###############
+## Variables ##
+###############
+DELAY = 2
+global usr
+
 # Build Objecs
 MyOS = com._OS_()
-global usr
 usr = users.MyUser()
 
 ## Unix Only Imports
@@ -32,22 +37,25 @@ if MyOS._type_ != "win32":
     import apt
     user = pwd.getpwuid(os.getuid())[4]
 
-###############
-## Variables ##
-###############
-DELAY = 2
+######################################################################
 
-###############
-## Functions ##
-###############
+##############
+##Functions ##
+##############
 
+# Debug function
+def Debug(var1, var2, TF):
+	DEBUG = True # flip de switch >..<
+	if DEBUG == True and TF == True: #
+		print(var1 +' = ' + var2)
+
+######################################################################
 
 ###############
 ## Main Menu ##
 ###############
-def main_menu():
-    """Clear screen + build menu"""
-    MyOS.Clear()  
+
+def BuildMenu():
     print('')
     print('Installations') # TODO #3 Compact into Key=Value pair for easy list creation for custom prog lists
     print('1. GitHub ............... ', MyOS.ProgExists('git'))
@@ -68,6 +76,9 @@ def main_menu():
     print('E. Exit')
     print('')
 
+####################################################################################
+
+
 ####################
 ## Configurations ##
 ####################
@@ -81,30 +92,24 @@ def IP():
 	time.sleep(DELAY)
 	main()
 
-##############
-##Functions ##
-##############
-# Debug function
-def Debug(var1, var2, TF):
-	DEBUG = True # flip de switch >..<
-	if DEBUG == True and TF == True: #
-		print(var1 +' = ' + var2)
 
-# Main Entry Point
+####################################################################################
+
 def main():
     """Main Entry point"""
     MyOS.Clear()
-    # grab user once
     usr.Login() # Handle login prompt externally
+
+    ####################
+    ## Program Driver ##
+    ####################
+
     while True:
-        main_menu()
+        MyOS.Clear()  
+        BuildMenu()
         option = input('Select: ').lower()
         if option.lower() == 'e':
             exit(0)
-        
-        ####################
-        ## Program Driver ##
-        ####################
                 
 # Pythons built in main entrypoint
 # calls init and runs main loop

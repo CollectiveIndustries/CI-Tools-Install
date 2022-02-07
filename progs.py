@@ -160,10 +160,10 @@ class Program(object):
 
     def Purge(self):
         """"Purge package from system"""
-        if TextMenu.Confirm('You are about to remove {} from your machine.\nYou can always reinstall it later.'.format(self.ProgName),''):
-            RunSudoProc('aptitude remove -y {}'.format(self.ProgName))
-            self.INSTALLED = False
-            self.Update()
+        # if TextMenu.Confirm('You are about to remove {} from your machine.\nYou can always reinstall it later.'.format(self.ProgName),''):
+        #     RunSudoProc('aptitude remove -y {}'.format(self.ProgName))
+        #     self.INSTALLED = False
+        #     self.Update()
 
     def _gitConfig_():
         gname = input('What name would you like to use?: ')

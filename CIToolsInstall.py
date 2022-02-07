@@ -15,8 +15,6 @@
 from lib import com
 from shutil import which
 from progs import Program
-import menu
-import platform
 import os, pwd, time, subprocess, sys
 import users
 

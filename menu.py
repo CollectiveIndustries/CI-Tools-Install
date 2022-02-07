@@ -70,7 +70,7 @@ class Menu_Settings:
     
     MARIA_PROG_NAME = ConfigSectionMap("MariaDB")['prog_name']
     MARIA_DESC = ConfigSectionMap("MariaDB")['desc']
-    MARIA_PORT = ConfigSectionMap("MariaDBB")['port']
+    MARIA_PORT = ConfigSectionMap("MariaDB")['port']
     MARIA_USER = ConfigSectionMap("MariaDB")['user']
 
 

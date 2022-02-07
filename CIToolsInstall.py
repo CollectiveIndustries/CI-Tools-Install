@@ -15,7 +15,7 @@
 from lib import com
 from shutil import which
 from progs import Program
-import configparser
+import menu
 import platform
 import os, pwd, time, subprocess, sys
 import users
@@ -39,21 +39,7 @@ DELAY = 2
 ###############
 ## Functions ##
 ###############
-# TODO #4 move this block of code to an SH script. 
-# Frankly if Python3 is _NOT INSTALLED_ how are we running this script?????
-# def init(): 
-#     """Check for and initilize dependancies"""
-#     MyOS.ProgExists('python3')
-#     MyOS.ProgExists('pip')
-#     if MyOS.ProgExists('python3') == 'Not Installed':
-#         os.system('sudo apt-get install -y python3')
-    
-#     global users
-#     if user == '':
-#         users = uname
-#     else:
-#         users = user
-#     main_menu()
+
 
 ###############
 ## Main Menu ##
@@ -62,20 +48,6 @@ def main_menu():
     """Clear screen + build menu"""
     MyOS.Clear() 
     
-    #print(config['Menu Options'], ' ........ ', MyOS.ProgExists(['Prog Name']))
-    
-    #print('')
-    #print('Installations') # TODO #3 Compact into Key=Value pair for easy list creation for custom prog lists
-    #print('1. GitHub ............... ', MyOS.ProgExists('git'))
-    #print('2. GCC .................. ', MyOS.ProgExists('build-essential'))
-    #print('3. CIFS Filesystem ...... ', MyOS.ProgExists('cifs-utils'))
-    #print('4. SSH Server ........... ', MyOS.ProgExists('openssh-server'))
-    #print('5. MySQL Server ......... ', MyOS.ProgExists('mysql-server'))
-    #print('6. MariaDB Server ....... ', MyOS.ProgExists('mariadb-server'))
-    #print('7. Apache ............... ', MyOS.ProgExists('apache2'))
-    #print('8. Dos 2 Unix Converter . ', MyOS.ProgExists('dos2unix'))
-    #print('9. Midnight Commander ... ', MyOS.ProgExists('mc'))
-    #print('')
     #print('Configurations')
     #print('8. Set IP to Static/Dynamic')
     #print('9. Config 2')

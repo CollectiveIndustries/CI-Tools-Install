@@ -44,6 +44,7 @@
   <ItemGroup>
     <Content Include="config.d\menu.cfg" />
     <Content Include="requirements.txt" />
+    <Content Include="start.sh" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>

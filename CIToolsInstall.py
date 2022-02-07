@@ -48,6 +48,7 @@ def main_menu():
     """Clear screen + build menu"""
     MyOS.Clear() 
     
+    print (GITHUB_PROG_NAME)
     #print('Configurations')
     #print('8. Set IP to Static/Dynamic')
     #print('9. Config 2')

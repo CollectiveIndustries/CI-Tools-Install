@@ -54,7 +54,7 @@ def ConfigWrite():
 class Menu_Settings:
     
     GITHUB_PROG_NAME = ConfigSectionMap("GitHub")['prog_name']
-    GITHUB_DESC = CConfigSectionMap("GitHub")['desc']
+    GITHUB_DESC = ConfigSectionMap("GitHub")['desc']
 
     GCC_PROG_NAME = ConfigSectionMap("GCC")['prog_name']
     GCC_DESC = ConfigSectionmap("GCC")['desc']

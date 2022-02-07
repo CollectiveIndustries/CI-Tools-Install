@@ -13,21 +13,21 @@
 ###############
 from lib import com
 from lib import config
+from configparser import ConfigParser
+import os
 
 ################
 ## Variables  ##
 ################
-
-
-
-from configparser import ConfigParser
-import os
-
-ConfigFile = "config.d/conf"
-
+ConfigFile = "config.d/menu.cfg"
 conf = ConfigParser()
 conf.read(os.path.abspath(ConfigFile))
 conf.sections()
+
+
+
+
+
 
 ## Config Parse Helper ##
 

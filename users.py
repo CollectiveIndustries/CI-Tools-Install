@@ -13,4 +13,4 @@ class MyUser():
         self.UserName = getpass.getuser().replace(',', '')
         print("Please login to continue.\nUsername = {}".format(self.UserName))
         self.PassWord = getpass.getpass("Login Password: ") # TODO #9 Check users login info and reask if wrong
-        progs.RunSudoProc('ls -shal /tmp 2>&1 /dev/null') # Test commit comment
+        progs.RunSudoProc('ls -shal /tmp 2>&1 /dev/null')

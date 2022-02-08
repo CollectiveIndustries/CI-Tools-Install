@@ -12,11 +12,14 @@
 #############
 ## Imports ##
 #############
-from lib import com
-from shutil import which
-from progs import Program
-import os, pwd, time, subprocess, sys
+
+# System Imports
+import time
 import users
+
+# Custom Imports
+from lib import com
+from menu import BuildMenu
 
 ###############
 ## Variables ##
@@ -28,11 +31,6 @@ global usr
 MyOS = com._OS_()
 usr = users.MyUser()
 
-## Unix Only Imports
-if MyOS._type_ != "win32":
-    import pwd # no module found, UNIX systems ONLY
-    user = pwd.getpwuid(os.getuid())[4]
-
 ######################################################################
 
 ##############
@@ -40,22 +38,17 @@ if MyOS._type_ != "win32":
 ##############
 
 # Debug function
+# TODO #12 Debug --> Verbosity
+# Turns debug function into a verbosity logger
+# should be usable for providing diffrent log
+# levels for debugging, errors, info, etc
 def Debug(var1, var2, TF):
-	DEBUG = True # flip de switch >..<
-	if DEBUG == True and TF == True: #
-		print(var1 +' = ' + var2)
+    """Debug Function"""
+    DEBUG = True # flip de switch >..<
+    if DEBUG == True and TF == True: #
+        print(var1 +' = ' + var2)
 
 ######################################################################
-
-###############
-## Main Menu ##
-###############
-
-def BuildMenu():
-    """Menu Builder framework"""
-    print('')
-
-####################################################################################
 
 
 ####################
@@ -93,5 +86,4 @@ def main():
 # Pythons built in main entrypoint
 # calls init and runs main loop
 if __name__ == "__main__":
-	# Switch over to the main function
     main()

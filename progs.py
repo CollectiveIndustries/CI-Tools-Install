@@ -45,7 +45,7 @@ def RunSudoProc(args):
         Return output"""
         p1_arg = "echo {}".format(usr.PassWord)
         p2_arg = "sudo -S {}".format(args)
-        try:
+        try: # TODO #10 ValueError: read of closed file
             p1 = Popen(shlex.split(p1_arg), stdout=PIPE)
             p2 = Popen(shlex.split(p2_arg), stdin=p1.stdout, stdout=PIPE)
             p1.stdout.close()  # Allow p1 to receive a SIGPIPE if p2 exits.

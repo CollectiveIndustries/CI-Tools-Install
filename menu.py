@@ -11,7 +11,6 @@
 ###############
 ##  Imports  ##
 ###############
-from lib import com
 from configparser import ConfigParser
 import os
 

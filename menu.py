@@ -29,7 +29,7 @@ class Config(object):
 
 ## Config Parse Helper ##
 
-    def SectionMap(self,section):
+    def MapSection(self,section):
         dict1 = {}
         options = self.conf.options(section)
         for option in options:
@@ -63,34 +63,34 @@ class Config(object):
 ################
 ## Variables  ##
 ################
-MenuConfigFile = "config.d/main.cfg"
+MainConfigFile = "config.d/main.cfg"
 
 ######################
 ##  Object Classes  ##
 ######################
-Menu_Settings = Config(MenuConfigFile)
+ConfigSettings = Config(MainConfigFile)
 
-# Global Menu Options
-GITHUB_PROG_NAME = Menu_Settings.SectionMap("GitHub")['prog_name']
-GITHUB_DESC = Menu_Settings.SectionMap("GitHub")['desc']
-GCC_PROG_NAME = Menu_Settings.SectionMap("GCC")['prog_name']
-GCC_DESC = Menu_Settings.SectionMap("GCC")['desc']
-CIFS_PROG_NAME = Menu_Settings.SectionMap("CIFS")['prog_name']
-CIFS_DESC = Menu_Settings.SectionMap("CIFS")['desc']
-SSH_PROG_NAME = Menu_Settings.SectionMap("SSH")['prog_name']
-SSH_DESC = Menu_Settings.SectionMap("SSH")['desc']
-SSH_PORT = Menu_Settings.SectionMap("SSH")['port']
-SSH_KEY = Menu_Settings.SectionMap("SSH")['public_key']
-MARIA_PROG_NAME = Menu_Settings.SectionMap("MariaDB")['prog_name']
-MARIA_DESC = Menu_Settings.SectionMap("MariaDB")['desc']
-MARIA_PORT = Menu_Settings.SectionMap("MariaDB")['port']
-MARIA_USER = Menu_Settings.SectionMap("MariaDB")['user_name']
-APACHE_PROG_NAME = Menu_Settings.SectionMap("Apache")['prog_name']
-APACHE_DESC = Menu_Settings.SectionMap("Apache")['desc']
-D2U_PROG_NAME = Menu_Settings.SectionMap("D2U")['prog_name']
-D2U_DESC = Menu_Settings.SectionMap("D2U")['desc']
-MC_PROG_NAME = Menu_Settings.SectionMap("MC")['prog_name']
-MC_DESC = Menu_Settings.SectionMap("MC")['desc']
+# Global Configuration Settings
+GITHUB_PROG_NAME = ConfigSettings.MapSection("GitHub")['prog_name']
+GITHUB_DESC = ConfigSettings.MapSection("GitHub")['desc']
+GCC_PROG_NAME = ConfigSettings.MapSection("GCC")['prog_name']
+GCC_DESC = ConfigSettings.MapSection("GCC")['desc']
+CIFS_PROG_NAME = ConfigSettings.MapSection("CIFS")['prog_name']
+CIFS_DESC = ConfigSettings.MapSection("CIFS")['desc']
+SSH_PROG_NAME = ConfigSettings.MapSection("SSH")['prog_name']
+SSH_DESC = ConfigSettings.MapSection("SSH")['desc']
+SSH_PORT = ConfigSettings.MapSection("SSH")['port']
+SSH_KEY = ConfigSettings.MapSection("SSH")['public_key']
+MARIA_PROG_NAME = ConfigSettings.MapSection("MariaDB")['prog_name']
+MARIA_DESC = ConfigSettings.MapSection("MariaDB")['desc']
+MARIA_PORT = ConfigSettings.MapSection("MariaDB")['port']
+MARIA_USER = ConfigSettings.MapSection("MariaDB")['user_name']
+APACHE_PROG_NAME = ConfigSettings.MapSection("Apache")['prog_name']
+APACHE_DESC = ConfigSettings.MapSection("Apache")['desc']
+D2U_PROG_NAME = ConfigSettings.MapSection("D2U")['prog_name']
+D2U_DESC = ConfigSettings.MapSection("D2U")['desc']
+MC_PROG_NAME = ConfigSettings.MapSection("MC")['prog_name']
+MC_DESC = ConfigSettings.MapSection("MC")['desc']
 
 ####################################################################################
 

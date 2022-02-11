@@ -11,3 +11,4 @@ typed-ast==1.5.2
 wrapt==1.13.3
 yapf==0.32.0
 configparser==5.2.0
+npyscreen==4.10.5

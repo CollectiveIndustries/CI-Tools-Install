@@ -150,6 +150,7 @@ class TestApp(npyscreen.NPSApp):
 		
 		# This lets the user play with the Form.
 		F.edit()
+        
 class CI_Installer(npyscreen.NPSApp):
     def main():
         """Menu Builder framework"""

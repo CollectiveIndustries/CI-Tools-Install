@@ -1,13 +1,16 @@
+actboy168.lua-debug
 apsislabs.mergetool-navigator
 aslamanver.vsc-export
 bmalehorn.shell-syntax
 christian-kohler.path-intellisense
 cschlosser.doxdocgen
+DalGhost.lsl-fp
 discretegames.f5anything
 donjayamanne.githistory
 eamodio.gitlens
 GitHub.vscode-pull-request-github
 Gruntfuggly.todo-tree
+homescapes-tech.lua-debugger
 ivanhofer.git-assistant
 jeff-hykin.better-cpp-syntax
 mhutchie.git-graph
@@ -23,6 +26,8 @@ ms-vscode.cpptools-extension-pack
 ms-vscode.cpptools-themes
 ms-vscode.makefile-tools
 mtxr.sqltools
+robberphex.php-debug
+rogalmic.bash-debug
 twixes.pypi-assistant
 twxs.cmake
 vichu006.pypi-watcher

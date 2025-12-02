@@ -1,5 +1,3 @@
-# CI-Tools-Install
+# CI-Tools
 
-This script is made for Collective Industries. It is or installations of
-programs that we use often as well as a few configuration options that
-we configure with every new server install.
+This repository will be a generalized toolbox for most common CI tools and toolsets. This repository contains Quality of Life scripts and utilities to make server, codebase, networking setup/maintinance more streamlined and efficient. Some tool chain will be a link to a seperate repository as some of them are purpose built and have expanded far beyond what this repository was orginally designed for.

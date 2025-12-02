@@ -1,20 +1,25 @@
 #!/usr/bin/env python3
 # =============================
 # pull_ollama_models.py
-# Pull multiple Ollama models automatically
+# Pull multiple Ollama models automatically from LLM_List.conf
 # =============================
 
 import subprocess
+import os
 
-# List of Ollama models to pull
-models = [
-    "deepseek-coder:6.7b",
-    "qwen2-coder:7b",
-    "codegemma:7b",
-    "codellama:7b",
-    "codellama:13b"
-]
+# Path to model list file
+model_list_file = os.path.join(os.path.dirname(__file__), "LLM_List.conf")
 
+# Check if file exists
+if not os.path.isfile(model_list_file):
+    print(f"❌ Model list file not found: {model_list_file}")
+    exit(1)
+
+# Read models from file, ignoring empty lines
+with open(model_list_file, "r") as f:
+    models = [line.strip() for line in f if line.strip()]
+
+# Pull each model
 for model in models:
     print(f"\nPulling model: {model} ...")
     try:

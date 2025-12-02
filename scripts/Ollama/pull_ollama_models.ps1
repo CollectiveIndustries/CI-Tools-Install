@@ -1,16 +1,19 @@
 # =============================
 # pull_ollama_models.ps1
-# Pull multiple Ollama models automatically
+# Pull multiple Ollama models automatically from LLM_List.conf
 # =============================
 
-# List of Ollama models to pull
-$modelList = @(
-    "deepseek-coder:6.7b",
-    "qwen2-coder:7b",
-    "codegemma:7b",
-    "codellama:7b",
-    "codellama:13b"
-)
+# Path to model list file
+$modelListFile = ".\LLM_List.conf"
+
+# Check if file exists
+if (-not (Test-Path $modelListFile)) {
+    Write-Host "❌ Model list file not found: $modelListFile" -ForegroundColor Red
+    exit 1
+}
+
+# Read models from file
+$modelList = Get-Content $modelListFile | Where-Object { $_.Trim() -ne "" }
 
 foreach ($model in $modelList) {
     Write-Host "Pulling model: $model ..." -ForegroundColor Cyan

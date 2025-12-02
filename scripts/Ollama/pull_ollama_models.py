@@ -24,9 +24,11 @@ for model in models:
     print(f"\nPulling model: {model} ...")
     try:
         result = subprocess.run(
-            ["ollama", "pull", model],
+            ["ollama.exe", "pull", model],
             capture_output=True,
-            text=True
+            text=True,
+            encoding="utf-8",
+            errors="replace"
         )
         if result.returncode == 0:
             print(f"✅ Successfully pulled {model}")

@@ -1,10 +1,4 @@
 ######################################
-
-
-
-
-
-
 ##
 ##		Collective Industries
 ##		 	Menu Objects
@@ -30,9 +24,7 @@ class TextMenu(object):
         else:
             self._menu_.field_names = ColHeaders
             for option, text in _items_.items():
-
                 self._menu_.add_row([option] + text)
-
 
     def Refresh(self, _items_=None):
         """Updates menu with new items"""
@@ -42,7 +34,6 @@ class TextMenu(object):
             self._menu_.field_names = []
         else:
             for option, text in _items_.items():
-
                 self._menu_.add_row([option] + text)
 
     def Align(self, header="", alignment="l"):
@@ -52,9 +43,8 @@ class TextMenu(object):
 
     def Confirm(self, prompt="", option=""):
         """Confirm dialog
-        :option: can be left blank depending on :prompt:"""
-
-
+        :option: can be left blank depending on :prompt:
+        """
         confirm = "{}{}{} Are you sure (y/n)? "
         answer = input(confirm.format(com.color.WARNING, prompt, com.color.END)).lower()
         if answer == "y":
@@ -66,18 +56,13 @@ class TextMenu(object):
         """Refuse empty answers"""
         option = None
         while True:
-
             option = input("{}{}:{} [  ] ".format(com.color.HEADER, promt, com.color.END))
             if option != "":
                 return option
             option = None
-
             print("{}{} cannot be empty!{}".format(com.color.FAIL, promt, com.color.END))
     
     def GetDefaults(self,prompt, defval):
-
-
-
         """Gets data from user providing a default option"""
         formatstr = "{}{}:{} [ {} ] "  # Header color prompt with default in [ ]
         response = input(formatstr.format(com.color.HEADER, prompt, com.color.END, defval))
